@@ -46,15 +46,22 @@ exports.cleanAll = function(req,res){
 exports.castVote = function(req,res){
   var entry = req.body;
   var ID = entry.choiceID;
+  var user = entry.user;
   poll.findOne({"choice._id":ID},function(err,polls){
-    polls["choice"].forEach(function(value,index){
-      if(value["_id"]==ID){
-        console.log(value);
-        polls.choice[index].vote+= 1;
-        polls.save(function(err,p){ res.json(p)});
+    console.log(polls);
+    if(!err){
+      polls.user.push(user);
+      polls["choice"].forEach(function(value,index){
+        if(value["_id"]==ID){
+          console.log(value);
+          polls.choice[index].vote+= 1;
+        }
+      })
+      polls.save(function(err,p){ res.json(p)});
 
-      }
-    })
+  }else{
+    res.send("poll does not exist");
+  }
   })
 
 }
