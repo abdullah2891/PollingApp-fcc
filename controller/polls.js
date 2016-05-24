@@ -2,6 +2,8 @@ var poll = require('../models/poll.model');
 var vote = require("../models/vote");
 
 
+
+
 exports.createPoll = function(req,res){
   var newPoll = new poll();
   var entry = req.body;
@@ -50,6 +52,11 @@ exports.castVote = function(req,res){
   poll.findOne({"choice._id":ID},function(err,polls){
     console.log(polls);
     if(!err){
+      //checking uniquness
+      polls["user"].forEach(function(UserDB){
+        if(UserDB===user){res.send("user voted already")};
+      })
+
       polls.user.push(user);
       polls["choice"].forEach(function(value,index){
         if(value["_id"]==ID){
