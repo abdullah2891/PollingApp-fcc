@@ -11,6 +11,22 @@
     <button class = "btn btn-primary" ng-click="postPoll()">Submit</button>
 </form>
 
+<form name="myForm">
+  <label>
+    <input type="radio" ng-model="color" value="red">
+    Red
+  </label><br/>
+  <label>
+    <input type="radio" ng-model="color" value="specialValue">
+    Green
+  </label><br/>
+  <label>
+    <input type="radio" ng-model="color" value="blue">
+    Blue
+  </label><br/>
+  <tt>color = {{color}}</tt><br/>
+ </form>
+
 <p>
   {{question}}
   {{choice}}

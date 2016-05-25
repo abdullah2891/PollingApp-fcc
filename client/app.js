@@ -24,9 +24,11 @@ weatherApp.controller('homeController', ['$scope','$http', function($scope,$http
   $http.get('/api/poll').then(function(response){
       $scope.data = response.data;
     })
-    $scope.colorValue = "submitted";
+    $scope.option = "";
 
 }]);
+
+
 
 weatherApp.controller('forecastController', ['$scope','$http' ,function($scope,$http) {
   $scope.choices = [];

@@ -2,9 +2,9 @@
       <h1>{{poll.question}}</h1>
       <form action="">
         <div class = "well" ng-repeat= "optionObj in poll.choice">
-        <input type="radio"  ng-model="colorValue" value="test"> {{optionObj.option}}<br>
+        <input type="radio"  ng-model="option" value="radio"> {{optionObj.option}}<br>
         </div>
       <button class="btn btn-primary">Submit</button>
       </form>
-      {{colorValue}}
+      {{option}}
 </div>
