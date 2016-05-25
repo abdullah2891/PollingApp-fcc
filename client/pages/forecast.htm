@@ -1,1 +1,19 @@
-Forecast
+<h1>POST POLLING </h1>
+
+<form class="navbar-form " role="search">
+    <input type="text" class="form-control" placeholder ="Questions" ng-model="question" aria-label="..."><br />
+
+    <input type="text" class="form-control" placeholder ="options" ng-model="choices[0]" aria-label="..."><br />
+    <input type="text" class="form-control" placeholder ="options" ng-model="choices[1]" aria-label="..."><br />
+    <input type="text" class="form-control" placeholder ="options" ng-model="choices[2]" aria-label="..."><br />
+    <input type="text" class="form-control" placeholder ="options" ng-model="choices[3]" aria-label="..."><br />
+
+    <button class = "btn btn-primary" ng-click="postPoll()">Submit</button>
+</form>
+
+<p>
+  {{question}}
+  {{choice}}
+  {{status}}
+  {{choices}}
+</p>

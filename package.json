@@ -5,11 +5,12 @@
   "main": "sever.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"node server.js"
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "angular": "^1.5.5",
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
     "mongoose": "^4.4.19"

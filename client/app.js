@@ -11,7 +11,7 @@ weatherApp.config(function ($routeProvider) {
         controller: 'homeController'
     })
 
-    .when('/forecast', {
+    .when('/post', {
         templateUrl: 'pages/forecast.htm',
         controller: 'forecastController'
     })
@@ -24,11 +24,30 @@ weatherApp.controller('homeController', ['$scope','$http', function($scope,$http
   $http.get('/api/poll').then(function(response){
       $scope.data = response.data;
     })
-
-
+    $scope.colorValue = "submitted";
 
 }]);
 
-weatherApp.controller('forecastController', ['$scope', function($scope) {
+weatherApp.controller('forecastController', ['$scope','$http' ,function($scope,$http) {
+  $scope.choices = [];
+  $scope.postPoll = function(){
+    $http({
+        method:"post",
+        url: "/api/poll",
+        headers : {'Content-Type': 'application/json'},
+        data : {
+          question:$scope.question,
+          choice:  $scope.choices,
+
+          }
+    })
+        .success(function(result){
+        $scope.status = result;
+
+    })
+         .error(function(err){
+             console.log(err);
+    });
+  }
 
 }]);
