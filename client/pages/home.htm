@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <h4>Forecast by City</h4>
+        <div class="form-group">
+            <input type="text" class="form-control" />
+        </div>
+        <a href="#/forecast" class="btn btn-primary">Get Forecast</a>
+        <button ng-click="getPolls()">poll data</button>
+      <div class "polls" ng-repeat= "poll in data">
+        <h1>{{poll.question}}</h1>
+        <form action="">
+          <div ng-repeat= "optionObj in poll.choice">
+
+          <input type="radio"> {{optionObj.option}}<br>
+        </div>
+        </form>
+      </div>
+    </div>
+</div>

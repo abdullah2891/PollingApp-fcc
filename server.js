@@ -4,8 +4,8 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 
 //db
-//mongoose.connect("mongodb://localhost/newPoll");
-mongoose.connect("mongodb://heroku_c3c0n4nt:rgj9aa3tjfeketnkg434mb1dnm@ds011863.mlab.com:11863/heroku_c3c0n4nt");
+mongoose.connect("mongodb://localhost/newPoll");
+//mongoose.connect("mongodb://heroku_c3c0n4nt:rgj9aa3tjfeketnkg434mb1dnm@ds011863.mlab.com:11863/heroku_c3c0n4nt");
 //controller
 pollController = require("./controller/polls");
 
@@ -15,7 +15,6 @@ app.use(bodyParser.urlencoded({exteded:true}));
 app.use(bodyParser.json());
 var router = express.Router();
 app.use('/api',router);
-
 //routes
 
 router.route('/poll')
@@ -30,6 +29,9 @@ router.route('/vote/cast')
 
 router.route('/vote/:count')
 .get(pollController.countVote);
+
+app.use('/',express.static(__dirname+'/client'));
+
 
 var PORT = process.env.PORT ||3000;
 
