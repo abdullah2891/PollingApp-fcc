@@ -3,29 +3,14 @@
 <form class="navbar-form " role="search">
     <input type="text" class="form-control" placeholder ="Questions" ng-model="question" aria-label="..."><br />
 
-    <input type="text" class="form-control" placeholder ="options" ng-model="choices[0]" aria-label="..."><br />
-    <input type="text" class="form-control" placeholder ="options" ng-model="choices[1]" aria-label="..."><br />
-    <input type="text" class="form-control" placeholder ="options" ng-model="choices[2]" aria-label="..."><br />
-    <input type="text" class="form-control" placeholder ="options" ng-model="choices[3]" aria-label="..."><br />
+    <input type="text" class="form-control" placeholder ="options" ng-model="choices[0]" ><br />
+    <input type="text" class="form-control" placeholder ="options" ng-model="choices[1]" ><br />
+    <input type="text" class="form-control" placeholder ="options" ng-model="choices[2]" ><br />
+    <input type="text" class="form-control" placeholder ="options" ng-model="choices[3]" ><br />
 
     <button class = "btn btn-primary" ng-click="postPoll()">Submit</button>
 </form>
 
-<form name="myForm">
-  <label>
-    <input type="radio" ng-model="color" value="red">
-    Red
-  </label><br/>
-  <label>
-    <input type="radio" ng-model="color" value="specialValue">
-    Green
-  </label><br/>
-  <label>
-    <input type="radio" ng-model="color" value="blue">
-    Blue
-  </label><br/>
-  <tt>color = {{color}}</tt><br/>
- </form>
 
 <p>
   {{question}}

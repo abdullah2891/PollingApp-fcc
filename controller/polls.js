@@ -11,7 +11,7 @@ exports.createPoll = function(req,res){
   newPoll.question = entry.question;
 
   entry["choice"].forEach(function(choice){
-    newPoll.choice.push({option:choice,vote:0});
+    if(choice!="") newPoll.choice.push({option:choice,vote:0});
   })
 
   newPoll.user.push("first");
