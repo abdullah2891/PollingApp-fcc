@@ -13,6 +13,7 @@
     "angular": "^1.5.5",
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
+    "express-session": "^1.13.0",
     "mongoose": "^4.4.19",
     "passport": "^0.3.2",
     "passport-twitter": "^1.0.4"
