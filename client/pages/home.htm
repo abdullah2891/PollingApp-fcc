@@ -1,10 +1,14 @@
 <div class "polls" ng-repeat= "poll in data">
       <h1>{{poll.question}}</h1>
+
       <form action="">
         <div class = "well" ng-repeat= "optionObj in poll.choice">
-        <input type="radio"  ng-model="option" value="radio"> {{optionObj.option}}<br>
+        <a ng-click ="post(optionObj._id)">  {{optionObj.option}}</a>
+        <br>
         </div>
       <button class="btn btn-primary">Submit</button>
-      </form>
       {{option}}
+      </form>
+
+
 </div>

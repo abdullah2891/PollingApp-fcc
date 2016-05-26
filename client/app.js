@@ -24,8 +24,12 @@ weatherApp.controller('homeController', ['$scope','$http', function($scope,$http
   $http.get('/api/poll').then(function(response){
       $scope.data = response.data;
     })
-    $scope.option = "";
 
+    $scope.option = "test";
+
+    $scope.post= function(input){
+          $scope.option = input;
+    }
 }]);
 
 
