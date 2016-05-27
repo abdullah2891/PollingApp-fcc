@@ -56,7 +56,10 @@ exports.information = function(req,res){
 exports.castVote = function(req,res){
   var entry = req.body;
   var ID = entry.choiceID;
-  var user = req.session.passport.user.usernam;
+
+  var user = req.session.passport.user.username;
+  //console.log(user);
+  //var user = entry.user;
   poll.findOne({"choice._id":ID},function(err,polls){
     console.log(polls);
     if(!err){
@@ -68,8 +71,8 @@ exports.castVote = function(req,res){
       polls.user.push(user);
       polls["choice"].forEach(function(value,index){
         if(value["_id"]==ID){
-          console.log(value);
           polls.choice[index].vote+= 1;
+          console.log(value);
         }
       })
       polls.save(function(err,p){ res.json(p)});

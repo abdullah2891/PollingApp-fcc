@@ -35,7 +35,7 @@ router.route('/cleanAll')
 .get(pollController.cleanAll);
 
 router.route('/vote/cast')
-.post(authController.isLoggedIn,pollController.castVote);
+.post(pollController.castVote);
 
 router.route('/info')
 .get(authController.isLoggedIn,pollController.information);

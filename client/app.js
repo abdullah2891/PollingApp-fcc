@@ -34,13 +34,14 @@ weatherApp.controller('homeController', ['$scope','$http', function($scope,$http
 
     $scope.post= function(question,vote){
       $scope.option = vote;
+
       $http({
           method:"post",
           url: "/api/vote/cast",
           headers : {'Content-Type': 'application/json'},
           data : {
             question:question,
-            choice:  vote,
+            choiceID:  vote,
 
             }
       })
@@ -60,6 +61,7 @@ weatherApp.controller('homeController', ['$scope','$http', function($scope,$http
 weatherApp.controller('forecastController', ['$scope','$http' ,function($scope,$http) {
   $scope.choices = [];
   $scope.postPoll = function(){
+
     $http({
         method:"post",
         url: "/api/poll",

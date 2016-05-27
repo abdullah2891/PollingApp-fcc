@@ -3,7 +3,8 @@
 
       <form action="">
         <div class = "well" ng-repeat= "optionObj in poll.choice">
-        <a ng-click ="post(poll.question,optionObj._id)">  {{optionObj.option}}</a>
+        <a ng-click ="post(poll.question,optionObj._id)">  {{optionObj.option}}
+          <span class="badge"> {{optionObj.vote}}</span></a>
         <br>
         </div>
       {{option}}
