@@ -48,16 +48,18 @@ exports.cleanAll = function(req,res){
 
 
 exports.information = function(req,res){
-  var user = req.session.passport.user;
-  console.log(user);
+  var user = req.session;
+  console.log(req.isAuthenticated());
   res.send(user.username);
 }
 
 exports.castVote = function(req,res){
   var entry = req.body;
   var ID = entry.choiceID;
+  if(req.isAuthenticated())
+   {
 
-  var user = req.session.passport.user.username;
+    var user = req.session.passport.user.username;
   //console.log(user);
   //var user = entry.user;
   poll.findOne({"choice._id":ID},function(err,polls){
@@ -75,10 +77,13 @@ exports.castVote = function(req,res){
           console.log(value);
         }
       })
-      polls.save(function(err,p){ res.json(p)});
+      polls.save(function(err,p){ res.redirect('/')});
 
   }else{
     res.send("poll does not exist");
   }
   })
+}else{
+  res.redirect('/api/info');
+}
 }
