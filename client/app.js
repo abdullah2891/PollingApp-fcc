@@ -16,6 +16,11 @@ weatherApp.config(function ($routeProvider) {
         controller: 'forecastController'
     })
 
+    .when('/login', {
+        templateUrl: 'pages/login.html',
+        controller: 'loginController'
+    })
+
 });
 
 // CONTROLLERS
@@ -25,12 +30,30 @@ weatherApp.controller('homeController', ['$scope','$http', function($scope,$http
       $scope.data = response.data;
     })
 
-    $scope.option = "test";
+    $scope.option = "not clicked";
 
-    $scope.post= function(input){
-          $scope.option = input;
+    $scope.post= function(question,vote){
+      $scope.option = vote;
+      $http({
+          method:"post",
+          url: "/api/vote/cast",
+          headers : {'Content-Type': 'application/json'},
+          data : {
+            question:question,
+            choice:  vote,
+
+            }
+      })
+          .success(function(result){
+          $scope.status = result;
+
+      })
+           .error(function(err){
+               console.log(err);
+      });
     }
-}]);
+    }
+]);
 
 
 
@@ -57,3 +80,8 @@ weatherApp.controller('forecastController', ['$scope','$http' ,function($scope,$
   }
 
 }]);
+
+weatherApp.controller('loginController',['$scope',function($scope){
+ $scope.status = "test";
+
+}])

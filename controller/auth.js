@@ -19,6 +19,7 @@ passport.use(new twitterStrategy(
     callbackURL:"http://127.0.0.1:3000/login/twitter/callback"
   },
   function(token,tokenSecret,user,done){
+    console.log(token);
       done(null,user);
   }))
 
@@ -26,5 +27,5 @@ passport.use(new twitterStrategy(
   exports.authenticate = passport.authenticate('twitter',{failureRedirect:'/#/login'});
   exports.isLoggedIn = function(req,res,next){
     if(req.isAuthenticated()) console.log("logged in");next();
-    res.redirect("/login/twitter/callback");
+    res.redirect("/#/login");
   }

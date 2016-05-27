@@ -14,14 +14,17 @@ authController = require('./controller/auth');
 //middlewares
 app.use(bodyParser.urlencoded({exteded:true}));
 app.use(bodyParser.json());
-var router = express.Router();
-app.use('/api',router);
+
 app.use(expressSession({
-secret:"this is a secret"
+  secret:"secret"
 }))
 app.use(passport.initialize());
 app.use(passport.session());
 
+//router configuration
+
+var router = express.Router();
+app.use('/api',router);
 //routes
 
 router.route('/poll')
@@ -32,16 +35,20 @@ router.route('/cleanAll')
 .get(pollController.cleanAll);
 
 router.route('/vote/cast')
-.post(pollController.castVote);
+.post(authController.isLoggedIn,pollController.castVote);
 
-router.route('/vote/:count')
-.get(pollController.countVote);
+router.route('/info')
+.get(authController.isLoggedIn,pollController.information);
+
+
+app.get('/info',function(req,res){
+  var user = req.session.passport.user.username;
+  res.send(user);
+})
 
 app.get('/login/twitter/callback',
 authController.authenticate,
 function(req,res){
-  console.log("LOGGED IN");
-  console.log(req.session["_passport"]);
   res.redirect('/');
 })
 

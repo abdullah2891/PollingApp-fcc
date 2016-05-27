@@ -1,7 +1,6 @@
 var poll = require('../models/poll.model');
 var vote = require("../models/vote");
-
-
+var passport = require('passport');
 
 
 exports.createPoll = function(req,res){
@@ -13,6 +12,7 @@ exports.createPoll = function(req,res){
   entry["choice"].forEach(function(choice){
     if(choice!="") newPoll.choice.push({option:choice,vote:0});
   })
+
 
   newPoll.user.push("first");
   newPoll.save(function(err,poll){
@@ -26,6 +26,7 @@ exports.createPoll = function(req,res){
 }
 
 exports.getAllPoll = function(req,res){
+  console.log(req.session);
   poll.find(function(err,polls){
     if(!err){
       res.json(polls);
@@ -45,10 +46,17 @@ exports.cleanAll = function(req,res){
 
 }
 
+
+exports.information = function(req,res){
+  var user = req.session.passport.user;
+  console.log(user);
+  res.send(user.username);
+}
+
 exports.castVote = function(req,res){
   var entry = req.body;
   var ID = entry.choiceID;
-  var user = entry.user;
+  var user = req.session.passport.user.usernam;
   poll.findOne({"choice._id":ID},function(err,polls){
     console.log(polls);
     if(!err){
@@ -70,9 +78,4 @@ exports.castVote = function(req,res){
     res.send("poll does not exist");
   }
   })
-
-}
-
-exports.countVote = function(req,res){
-
 }
