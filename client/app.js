@@ -32,7 +32,7 @@ weatherApp.controller('homeController', ['$scope','$http', function($scope,$http
 
     $scope.option = "not clicked";
 
-    $scope.post= function(question,vote){
+    $scope.post= function(question,option){
       $scope.option = vote;
 
       $http({
@@ -74,6 +74,9 @@ weatherApp.controller('forecastController', ['$scope','$http' ,function($scope,$
     })
         .success(function(result){
         $scope.status = result;
+        $http.get('/api/poll').then(function(response){
+            $scope.data = response.data;
+          })
 
     })
          .error(function(err){
