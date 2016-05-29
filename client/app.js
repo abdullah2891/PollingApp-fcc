@@ -47,6 +47,10 @@ weatherApp.controller('homeController', ['$scope','$http', function($scope,$http
       })
           .success(function(result){
           $scope.status = result;
+          $http.get('/api/poll').then(function(response){
+              $scope.data = response.data;
+            })
+
 
       })
            .error(function(err){
@@ -74,9 +78,6 @@ weatherApp.controller('forecastController', ['$scope','$http' ,function($scope,$
     })
         .success(function(result){
         $scope.status = result;
-        $http.get('/api/poll').then(function(response){
-            $scope.data = response.data;
-          })
 
     })
          .error(function(err){
