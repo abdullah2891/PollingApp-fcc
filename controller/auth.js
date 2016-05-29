@@ -17,6 +17,7 @@ passport.use(new twitterStrategy(
     consumerKey:tweetConfig.key,
     consumerSecret: tweetConfig.secret,
     callbackURL:"https://pollingapp-fcc.herokuapp.com/login/twitter/callback"
+    //callbackURL:"http://127.0.0.1:3000/login/twitter/callback"
   },
   function(token,tokenSecret,user,done){
     console.log(token);

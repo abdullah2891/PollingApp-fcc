@@ -26,7 +26,6 @@ exports.createPoll = function(req,res){
 }
 
 exports.getAllPoll = function(req,res){
-  console.log(req.session);
   poll.find(function(err,polls){
     if(!err){
       res.json(polls);
@@ -53,7 +52,7 @@ exports.information = function(req,res){
   res.send(user.username);
 }
 
-exports.castVote = function(req,res){
+exports.castVote = function(req,res,next){
   var entry = req.body;
   var ID = entry.choiceID;
   if(req.isAuthenticated())
@@ -63,21 +62,31 @@ exports.castVote = function(req,res){
   //console.log(user);
   //var user = entry.user;
   poll.findOne({"choice._id":ID},function(err,polls){
+    console.log("__________________found_____________________"+user);
     console.log(polls);
     if(!err){
       //checking uniquness
+      var unique = true;
       polls["user"].forEach(function(UserDB){
-        if(UserDB===user){res.send("user voted already")};
+        if(UserDB===user){
+          unique = false;
+        };
       })
 
       polls.user.push(user);
       polls["choice"].forEach(function(value,index){
         if(value["_id"]==ID){
           polls.choice[index].vote+= 1;
-          console.log(value);
         }
       })
-      polls.save(function(err,p){ res.redirect('/')});
+
+
+      console.log(unique);
+      if(unique){
+        polls.save(function(err,p){
+         res.redirect('/')
+       });
+     }
 
   }else{
     res.send("poll does not exist");
