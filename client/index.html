@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-us" ng-app="weatherApp">
+<html lang="en-us" ng-app="app">
     <head>
         <title>Polling App</title>
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -18,6 +18,12 @@
         <script src="//code.angularjs.org/1.3.0-rc.2/angular.min.js"></script>
         <script src="//code.angularjs.org/1.3.0-rc.2/angular-route.min.js"></script>
         <script src="//code.angularjs.org/1.3.0-rc.2/angular-resource.min.js"></script>
+
+        <!-- CDN for chart js-->
+        <link rel="stylesheet" href="http://jtblin.github.io/angular-chart.js/dist/angular-chart.css" />
+        <script src="http://jtblin.github.io/angular-chart.js/bower_components/Chart.js/Chart.js"></script>
+        <script src="http://jtblin.github.io/angular-chart.js/dist/angular-chart.js"></script>
+
         <script src="app.js"></script>
       </head>
 
@@ -35,6 +41,7 @@
           <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
           <li><a href="#/post"><i class="fa fa-home"></i> POST POLL</a></li>
           <li><a href="#/login"><i class="fa fa-home"></i> LOGIN</a></li>
+          <li><a href="#/chart"><i class="fa fa-home"></i>chart</a></li>
         </ul>
 			</div>
 			</nav>

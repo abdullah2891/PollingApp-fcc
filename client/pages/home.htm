@@ -1,28 +1,30 @@
-<div class="row" ng-repeat= "poll in data">
-  <div class="col-sm-6 col-md-4">
-    <div class="thumbnail">
-      <div>
-        <canvas id="pie" width= "500 " height= "500" class="chart chart-pie"
+<p>
+  {{votes}}
+</p>
+
+<div class "polls" ng-repeat= "poll in data">
+      <h1>{{poll.question}}</h1>
+      <div ng-controller ="piechart">
+        <canvas id="doughnut" class="chart chart-doughnut"
         chart-data="data" chart-labels="labels">
       </canvas>
       </div>
 
 
-      <div class="caption">
-        <h1>{{poll.question}}</h1>
-        <div>
-          <form action="">
-            <div class = "well" ng-repeat= "optionObj in poll.choice">
-            <a ng-click ="post(poll.question,optionObj._id)">  {{optionObj.option}}
-              <span class="badge"> {{optionObj.vote}}</span></a>
-            <br>
-            </div>
-          {{option}}
-
-          </form>
+      <form action="">
+        <div class = "well" ng-repeat= "optionObj in poll.choice">
+        <a ng-click ="post(poll.question,optionObj._id)">  {{optionObj.option}}
+          <span class="badge"> {{optionObj.vote}}</span></a>
+        <br>
         </div>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-      </div>
-    </div>
-  </div>
+      {{option}}
+
+      </form>
+
+
+
+
+
+
+
 </div>

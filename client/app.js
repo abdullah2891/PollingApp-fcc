@@ -1,8 +1,15 @@
 // MODULE
-var weatherApp = angular.module('weatherApp', ['ngRoute', 'ngResource']);
+var app = angular.module('app', ['ngRoute', 'ngResource',"chart.js"]);
+
+app.factory('dataService',function(){
+  var _dataObj = {};
+   return {
+     dataObj: _dataObj
+   };
+})
 
 // ROUTES
-weatherApp.config(function ($routeProvider) {
+app.config(function ($routeProvider) {
 
     $routeProvider
 
@@ -20,15 +27,25 @@ weatherApp.config(function ($routeProvider) {
         templateUrl: 'pages/login.html',
         controller: 'loginController'
     })
+    .when('/chart',{
+      templateUrl: 'pages/chart.html',
+      controller: 'chartController'
+    })
 
 });
 
 // CONTROLLERS
-weatherApp.controller('homeController', ['$scope','$http', function($scope,$http) {
+app.controller('homeController', ['$scope','$http', function($scope,$http) {
   $scope.data = "clicked";
+
+
+
   $http.get('/api/poll').then(function(response){
       $scope.data = response.data;
+
     })
+
+
 
     $scope.option = "not clicked";
 
@@ -61,7 +78,7 @@ weatherApp.controller('homeController', ['$scope','$http', function($scope,$http
 
 
 
-weatherApp.controller('forecastController', ['$scope','$http' ,function($scope,$http) {
+app.controller('forecastController', ['$scope','$http' ,function($scope,$http) {
   $scope.choices = [];
   $scope.postPoll = function(){
 
@@ -86,7 +103,23 @@ weatherApp.controller('forecastController', ['$scope','$http' ,function($scope,$
 
 }]);
 
-weatherApp.controller('loginController',['$scope',function($scope){
+app.controller('loginController',['$scope',function($scope){
  $scope.status = "test";
 
+}])
+
+app.controller('chartController',['$scope','dataService',function($scope,dataService){
+  $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
+  $scope.data = [3, 5, 0];
+  dataService.dataObj = $scope.data;
+  $scope.onClick = function (points, evt) {
+    console.log(points, evt);
+  };
+
+}])
+
+
+app.controller("piechart",['$scope','dataService',function($scope,dataService){
+  $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
+    $scope.data = dataService.dataObj;
 }])
