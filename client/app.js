@@ -38,6 +38,10 @@ app.config(function ($routeProvider) {
 app.controller('homeController', ['$scope','$http', 'dataService',function($scope,$http,dataService) {
   $scope.data = [];
 
+
+
+  dataService.dataObj = $scope.cookie;
+
   $http.get('/api/poll').then(function(response){
       $scope.data = response.data;
     })
@@ -112,29 +116,34 @@ function($scope,dataService,$cookies,$http){
 
   $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
   $scope.data = [3, 5, 0];
-  dataService.dataObj = $scope.data;
-
-  $http.get('/api/info').then(function(response){
-    var loggedIn = response.data.passport;
-
-    console.log(loggedIn);
-    if(typeof loggedIn=='undefined') {
-        $scope.cookie="not logged in";
-    }else{
-        $scope.cookie= "Logged In";
-    }
 
 
-  })
 
 }])
 
 
 app.controller("piechart",['$scope','dataService',function($scope,dataService){
-  $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
-    $scope.data = dataService;
+    //$scope.data = dataService;
 }])
 
-app.controller("navBarController",['$scope','dataService',function($scope,dataService){
-  $scope.loginStatus = "Login";
+app.controller("navBarController",['$scope','dataService','$http',function($scope,dataService,$http){
+
+
+$scope.logoutUrl ="";
+
+  $http.get('/api/info').then(function(response){
+    var loggedIn = response.data.passport;
+
+    if(typeof loggedIn=='undefined') {
+        $scope.loginStatus = "Login";
+        $scope.loginUrl = "#/login";
+
+    }else{
+      $scope.loginStatus = "TwitterID: " +loggedIn.user.username;
+      $scope.loginUrl = "/logout";
+
+    }
+
+  })
+
 }])

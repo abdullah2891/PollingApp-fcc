@@ -51,7 +51,10 @@ authController.authenticate,
 function(req,res){
   res.redirect('/');
 })
-
+app.get('/logout',function(req,res){
+  req.logout();
+  res.redirect('/');
+})
 app.use('/',express.static(__dirname+'/client'));
 
 
