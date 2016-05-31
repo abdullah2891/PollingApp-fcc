@@ -35,14 +35,11 @@ app.config(function ($routeProvider) {
 });
 
 // CONTROLLERS
-app.controller('homeController', ['$scope','$http', function($scope,$http) {
-  $scope.data = "clicked";
-
-
+app.controller('homeController', ['$scope','$http', 'dataService',function($scope,$http,dataService) {
+  $scope.data = [];
 
   $http.get('/api/poll').then(function(response){
       $scope.data = response.data;
-
     })
 
 
@@ -112,9 +109,7 @@ app.controller('chartController',['$scope','dataService',function($scope,dataSer
   $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
   $scope.data = [3, 5, 0];
   dataService.dataObj = $scope.data;
-  $scope.onClick = function (points, evt) {
-    console.log(points, evt);
-  };
+
 
 }])
 

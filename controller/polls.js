@@ -14,6 +14,7 @@ exports.createPoll = function(req,res){
   })
 
 
+
   newPoll.user.push("first");
   newPoll.save(function(err,poll){
     if(!err){
@@ -28,6 +29,21 @@ exports.createPoll = function(req,res){
 exports.getAllPoll = function(req,res){
   poll.find(function(err,polls){
     if(!err){
+      var array = [];
+      var voteArray =[];
+
+      polls.forEach(function(poll){
+        array=[];
+        poll["choice"].forEach(function(options){
+          array.push(options.vote);
+        })
+        console.log(poll["question"]);
+        console.log(array);
+        voteArray.push({"question":poll.question,"votes":array});
+        poll.voteArray.push(array);
+      })
+      console.log(voteArray);
+
       res.json(polls);
     }else{
       res.json(err);
@@ -62,8 +78,7 @@ exports.castVote = function(req,res,next){
   //console.log(user);
   //var user = entry.user;
   poll.findOne({"choice._id":ID},function(err,polls){
-    console.log("__________________found_____________________"+user);
-    console.log(polls);
+
     if(!err){
       //checking uniquness
       var unique = true;
@@ -73,6 +88,7 @@ exports.castVote = function(req,res,next){
         };
       })
 
+      console.log(polls.choice);
       polls.user.push(user);
       polls["choice"].forEach(function(value,index){
         if(value["_id"]==ID){
@@ -83,8 +99,11 @@ exports.castVote = function(req,res,next){
 
       console.log(unique);
       if(unique){
+
         polls.save(function(err,p){
-         res.redirect('/')
+          if(!err){
+            res.redirect('/')
+          }
        });
      }
 
