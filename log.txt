@@ -1,5 +1,0 @@
-
-> polling-app@1.0.0 start C:\Users\Abdullah_Rahman\Documents\nodejs\deployed\PollingApp-fcc
-> node server.js
-
-polling app is starting at PORT 3000
