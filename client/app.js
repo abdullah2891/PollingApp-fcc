@@ -1,5 +1,5 @@
 // MODULE
-var app = angular.module('app', ['ngRoute', 'ngResource',"chart.js"]);
+var app = angular.module('app', ['ngRoute', 'ngResource',"chart.js","ngCookies"]);
 
 app.factory('dataService',function(){
   var _dataObj = {};
@@ -35,14 +35,11 @@ app.config(function ($routeProvider) {
 });
 
 // CONTROLLERS
-app.controller('homeController', ['$scope','$http', function($scope,$http) {
-  $scope.data = "clicked";
-
-
+app.controller('homeController', ['$scope','$http', 'dataService',function($scope,$http,dataService) {
+  $scope.data = [];
 
   $http.get('/api/poll').then(function(response){
       $scope.data = response.data;
-
     })
 
 
@@ -108,18 +105,36 @@ app.controller('loginController',['$scope',function($scope){
 
 }])
 
-app.controller('chartController',['$scope','dataService',function($scope,dataService){
+app.controller('chartController',['$scope','dataService',"$cookies",'$http',
+function($scope,dataService,$cookies,$http){
+  $scope.cookie = "";
+  console.log($cookies);
+
   $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
   $scope.data = [3, 5, 0];
   dataService.dataObj = $scope.data;
-  $scope.onClick = function (points, evt) {
-    console.log(points, evt);
-  };
+
+  $http.get('/api/info').then(function(response){
+    var loggedIn = response.data.passport;
+
+    console.log(loggedIn);
+    if(typeof loggedIn=='undefined') {
+        $scope.cookie="not logged in";
+    }else{
+        $scope.cookie= "Logged In";
+    }
+
+
+  })
 
 }])
 
 
 app.controller("piechart",['$scope','dataService',function($scope,dataService){
   $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
-    $scope.data = dataService.dataObj;
+    $scope.data = dataService;
+}])
+
+app.controller("navBarController",['$scope','dataService',function($scope,dataService){
+  $scope.loginStatus = "Login";
 }])

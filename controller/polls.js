@@ -14,6 +14,7 @@ exports.createPoll = function(req,res){
   })
 
 
+
   newPoll.user.push("first");
   newPoll.save(function(err,poll){
     if(!err){
@@ -28,6 +29,27 @@ exports.createPoll = function(req,res){
 exports.getAllPoll = function(req,res){
   poll.find(function(err,polls){
     if(!err){
+      var array = [];
+      var voteArray =[];
+      var q_array =[];
+      var poll_array = [];
+      polls.forEach(function(poll){
+        array=[];q_array=[];
+        poll["choice"].forEach(function(options){
+          array.push(options.vote);
+          q_array.push(options.option);
+        })
+        console.log(poll["question"]);
+        console.log(array);
+        voteArray.push({"question":poll.question,"votes":array});
+        poll.voteArray.push(array);
+        poll.optionArray.push(q_array);
+        poll_array.push(q_array);
+
+      })
+      console.log(voteArray);
+      console.log(poll_array);
+
       res.json(polls);
     }else{
       res.json(err);
@@ -46,10 +68,9 @@ exports.cleanAll = function(req,res){
 }
 
 
-exports.information = function(req,res){
+exports.loggedIn = function(req,res){
   var user = req.session;
-  console.log(req.isAuthenticated());
-  res.send(user.username);
+  res.send(user);
 }
 
 exports.castVote = function(req,res,next){
@@ -62,8 +83,7 @@ exports.castVote = function(req,res,next){
   //console.log(user);
   //var user = entry.user;
   poll.findOne({"choice._id":ID},function(err,polls){
-    console.log("__________________found_____________________"+user);
-    console.log(polls);
+
     if(!err){
       //checking uniquness
       var unique = true;
@@ -73,6 +93,7 @@ exports.castVote = function(req,res,next){
         };
       })
 
+      console.log(polls.choice);
       polls.user.push(user);
       polls["choice"].forEach(function(value,index){
         if(value["_id"]==ID){
@@ -83,8 +104,11 @@ exports.castVote = function(req,res,next){
 
       console.log(unique);
       if(unique){
+
         polls.save(function(err,p){
-         res.redirect('/')
+          if(!err){
+            res.redirect('/')
+          }
        });
      }
 
