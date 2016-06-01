@@ -1,21 +1,10 @@
-<<<<<<< HEAD
-<div>
-  {{cookie}}
-</div>
+
 <div class "polls" ng-repeat= "poll in data">
       <h1>{{poll.question}}</h1>
       {{poll.voteArray[0]}}
       <div ng-controller ="piechart">
         <canvas id="doughnut" class="chart chart-doughnut"
         chart-data="poll.voteArray[0]" chart-labels="poll.optionArray[0]">
-=======
-<div class "polls" ng-repeat= "poll in data">
-      <h1>{{poll.question}}</h1>
-
-      <div ng-controller ="piechart">
-        <canvas id="doughnut" class="chart chart-doughnut"
-        chart-data="poll.voteArray[0]" chart-labels="labels">
->>>>>>> a49cc87709acac3c6362cbae2852ea5a7893a9af
       </canvas>
       </div>
 

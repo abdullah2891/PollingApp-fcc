@@ -31,7 +31,6 @@ exports.getAllPoll = function(req,res){
     if(!err){
       var array = [];
       var voteArray =[];
-<<<<<<< HEAD
       var q_array =[];
       var poll_array = [];
       polls.forEach(function(poll){
@@ -39,29 +38,17 @@ exports.getAllPoll = function(req,res){
         poll["choice"].forEach(function(options){
           array.push(options.vote);
           q_array.push(options.option);
-=======
-
-      polls.forEach(function(poll){
-        array=[];
-        poll["choice"].forEach(function(options){
-          array.push(options.vote);
->>>>>>> a49cc87709acac3c6362cbae2852ea5a7893a9af
         })
         console.log(poll["question"]);
         console.log(array);
         voteArray.push({"question":poll.question,"votes":array});
         poll.voteArray.push(array);
-<<<<<<< HEAD
         poll.optionArray.push(q_array);
         poll_array.push(q_array);
 
       })
       console.log(voteArray);
       console.log(poll_array);
-=======
-      })
-      console.log(voteArray);
->>>>>>> a49cc87709acac3c6362cbae2852ea5a7893a9af
 
       res.json(polls);
     }else{
