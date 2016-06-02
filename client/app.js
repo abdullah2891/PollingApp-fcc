@@ -20,7 +20,7 @@ app.config(function ($routeProvider) {
 
     .when('/post', {
         templateUrl: 'pages/forecast.htm',
-        controller: 'forecastController'
+        controller: 'pollController'
     })
 
     .when('/login', {
@@ -60,7 +60,7 @@ app.controller('homeController', ['$scope','$http', 'dataService',function($scop
             }
       })
           .success(function(result){
-          $scope.status = result;
+          $scope.status = "<h1>POll SAVED</h1>" ;
           $http.get('/api/poll').then(function(response){
               $scope.data = response.data;
             })
@@ -75,7 +75,7 @@ app.controller('homeController', ['$scope','$http', 'dataService',function($scop
 
 
 
-app.controller('forecastController', ['$scope','$http' ,function($scope,$http) {
+app.controller('pollController', ['$scope','$http' ,function($scope,$http) {
   $scope.choices = [];
   $scope.postPoll = function(){
 
@@ -90,7 +90,8 @@ app.controller('forecastController', ['$scope','$http' ,function($scope,$http) {
           }
     })
         .success(function(result){
-        $scope.status = result;
+
+        $scope.status = "POLL SAVED";
 
     })
          .error(function(err){
@@ -100,8 +101,8 @@ app.controller('forecastController', ['$scope','$http' ,function($scope,$http) {
 
 }]);
 
-app.controller('loginController',['$scope',function($scope){
- $scope.status = "test";
+app.controller('loginController',['$scope','$location',function($scope,$location){
+ $scope.status = $location.absUrl();
 
 }])
 
