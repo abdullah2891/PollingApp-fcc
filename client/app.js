@@ -37,16 +37,17 @@ app.config(function ($routeProvider) {
 // CONTROLLERS
 app.controller('homeController', ['$scope','$http', 'dataService',function($scope,$http,dataService) {
   $scope.data = [];
-
+  $scope.voteStatus = "";
   $http.get('/api/poll').then(function(response){
       $scope.data = response.data;
     })
 
 
 
-    $scope.vote = "Vote!";
+    $scope.option = "not clicked";
 
     $scope.post= function(question,vote){
+      $scope.option = vote;
 
       $http({
           method:"post",
@@ -59,16 +60,15 @@ app.controller('homeController', ['$scope','$http', 'dataService',function($scop
             }
       })
           .success(function(result){
-          $scope.vote = "Voted!" ;
+          $scope.status = "<h1>POll SAVED</h1>" ;
           $http.get('/api/poll').then(function(response){
               $scope.data = response.data;
+              $scope.voteStatus ="Voting Successful";
             })
 
       })
            .error(function(err){
-               console.log(err);
-               $scope.vote = err;
-
+               $scope.voteStatus =  err;
       });
     }
     }

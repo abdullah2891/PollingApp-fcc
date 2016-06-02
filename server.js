@@ -5,8 +5,8 @@ var bodyParser = require('body-parser');
 var expressSession = require('express-session');
 var passport = require('passport');
 //db
-mongoose.connect("mongodb://localhost/newPoll");
-//mongoose.connect("mongodb://heroku_rthknr1j:4nnrnftg22o2jd5818c2jkt244@ds017553.mlab.com:17553/heroku_rthknr1j");
+//mongoose.connect("mongodb://localhost/newPoll");
+mongoose.connect("mongodb://heroku_rthknr1j:4nnrnftg22o2jd5818c2jkt244@ds017553.mlab.com:17553/heroku_rthknr1j");
 //controller
 pollController = require("./controller/polls");
 authController = require('./controller/auth');
@@ -35,10 +35,10 @@ router.route('/cleanAll')
 .get(pollController.cleanAll);
 
 router.route('/vote/cast')
-.post(authController.isLoggedIn,pollController.castVote);
+.post(pollController.castVote);
 
 router.route('/info')
-.get(authController.isLoggedIn,pollController.loggedIn);
+.get(pollController.loggedIn);
 
 
 app.get('/info',function(req,res){

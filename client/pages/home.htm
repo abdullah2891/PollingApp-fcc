@@ -1,10 +1,9 @@
 
 <div class "polls" ng-repeat= "poll in data">
-
+  {{voteStatus}}
 
 
       <h1>{{poll.question}}</h1>
-      {{vote}}
       {{poll.voteArray[0]}}
       <div id= "chart-container"ng-controller ="piechart">
         <canvas id="doughnut"  class="chart chart-doughnut"
@@ -20,8 +19,7 @@
               </div>
               <div class = "col-md-1">
                 <button ng-click = "post(poll.question,optionObj._id)" id="voteBtn" class = "btn btn-primary">
-                Vote!
-                </button>
+                  Vote!</button>
               </div>
 
             </div>

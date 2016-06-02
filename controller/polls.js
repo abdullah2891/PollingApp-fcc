@@ -107,12 +107,12 @@ exports.castVote = function(req,res,next){
 
         polls.save(function(err,p){
           if(!err){
-            res.redirect('/');
+            res.redirect('/')
           }
        });
      }else{
-       console.log("not unique");
-       res.send(400,"user already voted");
+       console.log("already voted");
+       res.send(401,"User already voted");
      }
 
   }else{
@@ -120,6 +120,7 @@ exports.castVote = function(req,res,next){
   }
   })
 }else{
-  res.redirect('/api/info');
+  console.log("Not findig cookie");
+  res.send(400,"user not authenticated");
 }
 }
