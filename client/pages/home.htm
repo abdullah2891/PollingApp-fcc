@@ -12,11 +12,11 @@
 
       <form action="">
         <div class = "well row" ng-repeat= "optionObj in poll.choice">
-          <div class = "col-md-11">
+          <div class = "col-md-8">
 
           <strong>{{optionObj.option}}</strong>
               </div>
-              <div class = "col-md-1">
+              <div class = "col-md-4">
                 <button ng-click = "post(poll.question,optionObj._id)" id="voteBtn" class = "btn btn-primary">
                   Click here to Vote!</button>
               </div>
