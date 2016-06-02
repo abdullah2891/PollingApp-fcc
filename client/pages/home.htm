@@ -1,15 +1,8 @@
 
 <div class "polls" ng-repeat= "poll in data">
-  <div ng-if="already" class = "label label-warning">
-      {{voteStatus}}
-  </div>
-  <div ng-if="authenticated" class = "label label-danger">
-      {{voteStatus}}
-  </div>
-
-
 
       <h1>{{poll.question}}</h1>
+
       {{poll.voteArray[0]}}
       <div id= "chart-container"ng-controller ="piechart">
         <canvas id="doughnut"  class="chart chart-doughnut"
@@ -25,7 +18,7 @@
               </div>
               <div class = "col-md-1">
                 <button ng-click = "post(poll.question,optionObj._id)" id="voteBtn" class = "btn btn-primary">
-                  Vote!</button>
+                  Click here to Vote!</button>
               </div>
 
             </div>
