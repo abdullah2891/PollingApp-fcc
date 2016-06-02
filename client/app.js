@@ -67,7 +67,8 @@ app.controller('homeController', ['$scope','$http', 'dataService',function($scop
       })
            .error(function(err){
                console.log(err);
-               $scope.vote = "Please Login";
+               $scope.vote = err;
+
       });
     }
     }

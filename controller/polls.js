@@ -111,11 +111,12 @@ exports.castVote = function(req,res,next){
           }
        });
      }else{
-       res.send(400,"already voted");
+       console.log("not unique");
+       res.send(400,"user already voted");
      }
 
   }else{
-    res.send("poll does not exist");
+    res.send(400,"poll does not exist");
   }
   })
 }else{
