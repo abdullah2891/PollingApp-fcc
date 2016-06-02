@@ -44,10 +44,9 @@ app.controller('homeController', ['$scope','$http', 'dataService',function($scop
 
 
 
-    $scope.option = "not clicked";
+    $scope.vote = "Vote!";
 
     $scope.post= function(question,vote){
-      $scope.option = vote;
 
       $http({
           method:"post",
@@ -60,7 +59,7 @@ app.controller('homeController', ['$scope','$http', 'dataService',function($scop
             }
       })
           .success(function(result){
-          $scope.status = "<h1>POll SAVED</h1>" ;
+          $scope.vote = "Voted!" ;
           $http.get('/api/poll').then(function(response){
               $scope.data = response.data;
             })
@@ -68,6 +67,7 @@ app.controller('homeController', ['$scope','$http', 'dataService',function($scop
       })
            .error(function(err){
                console.log(err);
+               $scope.vote = "Please Login";
       });
     }
     }

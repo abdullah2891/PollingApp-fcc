@@ -107,9 +107,11 @@ exports.castVote = function(req,res,next){
 
         polls.save(function(err,p){
           if(!err){
-            res.redirect('/')
+            res.redirect('/');
           }
        });
+     }else{
+       res.send(400,"already voted");
      }
 
   }else{

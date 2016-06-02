@@ -1,3 +1,8 @@
 #chart-container{
   height:80%%;
 }
+
+#voteBtn{
+  border-radius: 100%;
+  padding:20px 20px 20px 20px;
+}

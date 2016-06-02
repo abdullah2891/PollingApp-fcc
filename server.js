@@ -35,10 +35,10 @@ router.route('/cleanAll')
 .get(pollController.cleanAll);
 
 router.route('/vote/cast')
-.post(pollController.castVote);
+.post(authController.isLoggedIn,pollController.castVote);
 
 router.route('/info')
-.get(pollController.loggedIn);
+.get(authController.isLoggedIn,pollController.loggedIn);
 
 
 app.get('/info',function(req,res){
