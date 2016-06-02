@@ -1,6 +1,12 @@
 
 <div class "polls" ng-repeat= "poll in data">
-  {{voteStatus}}
+  <div ng-if="already" class = "label label-warning">
+      {{voteStatus}}
+  </div>
+  <div ng-if="authenticated" class = "label label-danger">
+      {{voteStatus}}
+  </div>
+
 
 
       <h1>{{poll.question}}</h1>

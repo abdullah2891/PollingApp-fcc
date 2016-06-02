@@ -37,7 +37,7 @@ app.config(function ($routeProvider) {
 // CONTROLLERS
 app.controller('homeController', ['$scope','$http', 'dataService',function($scope,$http,dataService) {
   $scope.data = [];
-  $scope.voteStatus = "";
+  $scope.voteStatus = "";$scope.already =false;$scope.authenticated = false;
   $http.get('/api/poll').then(function(response){
       $scope.data = response.data;
     })
@@ -68,7 +68,9 @@ app.controller('homeController', ['$scope','$http', 'dataService',function($scop
 
       })
            .error(function(err){
-               $scope.voteStatus =  err;
+             $scope.voteStatus = err;
+             if(err=="User already voted") $scope.already = true;
+            if(err=="user not authenticated") $scope.authenticated = true;
       });
     }
     }
