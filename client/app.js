@@ -35,7 +35,8 @@ app.config(function ($routeProvider) {
 });
 
 // CONTROLLERS
-app.controller('homeController', ['$scope','$http', 'dataService',function($scope,$http,dataService) {
+app.controller('homeController', ['$scope','$http', 'dataService',"$window",
+function($scope,$http,dataService,$window) {
   $scope.data = [];
   $scope.voteStatus = "";$scope.already =false;$scope.authenticated = false;
   $http.get('/api/poll').then(function(response){
@@ -69,8 +70,7 @@ app.controller('homeController', ['$scope','$http', 'dataService',function($scop
       })
            .error(function(err){
              $scope.voteStatus = err;
-             if(err=="User already voted") $scope.already = true;
-            if(err=="user not authenticated") $scope.authenticated = true;
+            $window.alert(err);
       });
     }
     }
@@ -134,7 +134,7 @@ function($scope,dataService,$http){
 
     console.log(loggedIn);
     if(typeof loggedIn=='undefined') {
-        $scope.loginStatus="Log In";
+        $scope.loginStatus="Log In with twitter";
     }else{
         $scope.loginStatus= response.data.passport.user.username;
     }
