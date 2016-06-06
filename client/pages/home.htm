@@ -1,10 +1,10 @@
 
-<div class "polls" ng-repeat= "poll in data">
+<div id= "chart-container" class "polls" ng-repeat= "poll in data">
 
       <h1>{{poll.question}}</h1>
 
       {{poll.voteArray[0]}}
-      <div id= "chart-container"ng-controller ="piechart">
+      <div ng-controller ="piechart">
         <canvas id="doughnut"  class="chart chart-doughnut"
         chart-data="poll.voteArray[0]" chart-labels="poll.optionArray[0]">
       </canvas>
