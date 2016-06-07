@@ -47,7 +47,7 @@ function($scope,$http,dataService,$window) {
 
     $scope.option = "not clicked";
 
-    $scope.post= function(question,vote){
+    $scope.post = function(question,vote){
       $scope.option = vote;
 
       $http({

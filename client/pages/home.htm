@@ -4,7 +4,12 @@
       <h1>{{poll.question}}</h1>
 
       {{poll.voteArray[0]}}
-      <div ng-controller ="piechart">
+
+
+      <p>Show Chart <input type="checkbox" ng-model="checked" /></p><br/>
+
+    </br//>
+      <div ng-controller ="piechart" ng-show="checked">
         <canvas id="doughnut"  class="chart chart-doughnut"
         chart-data="poll.voteArray[0]" chart-labels="poll.optionArray[0]">
       </canvas>
