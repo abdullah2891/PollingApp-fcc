@@ -32,7 +32,7 @@ passport.use(new twitterStrategy(
       console.log("logged in");
       res.send(200,"authenticated");
     }else{
-      res.send(400,"User not authenticated");
+      res.send(400,"You are not authenticated");
     }
 
 

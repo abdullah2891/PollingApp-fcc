@@ -1,19 +1,13 @@
 
-<div id= "chart-container" class "polls" ng-repeat= "poll in data">
+<div class="polls jumbotron " ng-repeat= "poll in data">
+  <div class = "well">
+    <h1>{{poll.question}}</h1>
+  </div>
+      <div class = "row">
 
-      <h1>{{poll.question}}</h1>
-
-      {{poll.voteArray[0]}}
 
 
-      <p>Show Chart <input type="checkbox" ng-model="checked" /></p><br/>
-
-    </br//>
-      <div ng-controller ="piechart" ng-show="checked">
-        <canvas id="doughnut"  class="chart chart-doughnut"
-        chart-data="poll.voteArray[0]" chart-labels="poll.optionArray[0]">
-      </canvas>
-      </div>
+        <div class = "col-md-5">
 
       <form action="">
         <div class = "well row" ng-repeat= "optionObj in poll.choice">
@@ -23,33 +17,30 @@
               </div>
               <div class = "col-md-2">
                 <button ng-click = "post(poll.question,optionObj._id)" id="voteBtn" class = "btn btn-primary">
-                  Click here to Vote!</button>
+                  Vote!</button>
               </div>
 
             </div>
-      {{option}}
 
       </form>
 
+      <label>Show Chart <input type="checkbox" ng-model="checked" /></label><br/>
+
+    </div>
+    <div class ="col-md-2"></div>
+    <div class = "col-md-5">
 
 
 
+      </br//>
+        <div ng-controller ="piechart" ng-show="checked" class = "chart-container">
+          <canvas id="doughnut"  class="chart chart-doughnut"
+          chart-data="poll.voteArray[0]" chart-labels="poll.optionArray[0]">
+        </canvas>
+        </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      </div>
+        </div>
 
 
 </div>

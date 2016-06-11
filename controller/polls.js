@@ -112,7 +112,7 @@ exports.castVote = function(req,res,next){
        });
      }else{
        console.log("already voted");
-       res.send(401,"User already voted");
+       res.send(401,"You already voted");
      }
 
   }else{
@@ -121,6 +121,6 @@ exports.castVote = function(req,res,next){
   })
 }else{
   console.log("Not findig cookie");
-  res.send(400,"user not authenticated");
+  res.send(400,"You are not logged in");
 }
 }

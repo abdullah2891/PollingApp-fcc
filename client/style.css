@@ -1,8 +1,14 @@
-#chart-container{
-
+.chart-container{
+  width:30em;
+  height :auto;
 }
+
 .animate-hide.ng-hide {
   line-height: 0;
   opacity: 0;
   padding: 0 10px;
+}
+#voteBtn{
+  padding : 15px 17px 15px 17px;
+  border-radius: 100%;
 }
