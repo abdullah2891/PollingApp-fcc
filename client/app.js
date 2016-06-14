@@ -95,7 +95,7 @@ app.controller('pollController', ['$scope','$http','$window' ,function($scope,$h
         .success(function(result){
 
         $scope.status = "POLL SAVED";
-        $window.alert(result);
+        $window.alert("Poll created!");
 
     })
          .error(function(err){
