@@ -10,7 +10,7 @@ exports.createPoll = function(req,res){
   newPoll.question = entry.question;
 
   entry["choice"].forEach(function(choice){
-    if(choice!="") newPoll.choice.push({option:choice,vote:1});
+    if(choice!="") newPoll.choice.push({option:choice,vote:0.1});
   })
 
 
