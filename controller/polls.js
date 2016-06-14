@@ -10,7 +10,7 @@ exports.createPoll = function(req,res){
   newPoll.question = entry.question;
 
   entry["choice"].forEach(function(choice){
-    if(choice!="") newPoll.choice.push({option:choice,vote:0});
+    if(choice!="") newPoll.choice.push({option:choice,vote:1});
   })
 
 
@@ -20,7 +20,7 @@ exports.createPoll = function(req,res){
     if(!err){
       res.json(poll);
     }else{
-      res.json(err);
+      res.send(400,"ERROR MAKING POLL");
     }
   })
 
