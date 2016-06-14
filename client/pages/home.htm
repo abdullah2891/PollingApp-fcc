@@ -24,7 +24,6 @@
 
       </form>
 
-      <label>Show Chart <input type="checkbox" ng-model="checked" /></label><br/>
 
     </div>
     <div class ="col-md-2"></div>
@@ -33,7 +32,7 @@
 
 
       </br//>
-        <div ng-controller ="piechart" ng-show="checked" class = "chart-container">
+        <div ng-controller ="piechart" class = "chart-container">
           <canvas id="doughnut"  class="chart chart-doughnut"
           chart-data="poll.voteArray[0]" chart-labels="poll.optionArray[0]">
         </canvas>
