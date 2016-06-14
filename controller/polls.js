@@ -50,7 +50,7 @@ exports.getAllPoll = function(req,res){
       console.log(voteArray);
       console.log(poll_array);
 
-      res.send(200,"NEW POLL CREATED");
+      res.json(polls);
     }else{
       res.send(400,"error making new poll");
     }
