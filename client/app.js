@@ -61,11 +61,11 @@ function($scope,$http,dataService,$window) {
             }
       })
           .success(function(result){
-          $scope.status = "<h1>POll SAVED</h1>" ;
           $http.get('/api/poll').then(function(response){
               $scope.data = response.data;
               $scope.voteStatus ="Voting Successful";
             })
+            $window.alert(result);
 
       })
            .error(function(err){

@@ -107,7 +107,7 @@ exports.castVote = function(req,res,next){
 
         polls.save(function(err,p){
           if(!err){
-            res.redirect('/')
+            res.status(200).("Voted!");
           }
        });
      }else{
