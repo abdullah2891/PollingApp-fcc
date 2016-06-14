@@ -78,7 +78,7 @@ function($scope,$http,dataService,$window) {
 
 
 
-app.controller('pollController', ['$scope','$http' ,function($scope,$http) {
+app.controller('pollController', ['$scope','$http','$window' ,function($scope,$http,$window) {
   $scope.choices = [];
   $scope.postPoll = function(){
 
@@ -95,10 +95,13 @@ app.controller('pollController', ['$scope','$http' ,function($scope,$http) {
         .success(function(result){
 
         $scope.status = "POLL SAVED";
+        $window.alert(result);
 
     })
          .error(function(err){
+
              console.log(err);
+             $window.alert(err);
     });
   }
 
