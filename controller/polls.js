@@ -20,7 +20,7 @@ exports.createPoll = function(req,res){
     if(!err){
       res.json(poll);
     }else{
-      res.send(400,"ERROR MAKING POLL");
+      res.send(400,"Error:Did you fill all the required fields?");
     }
   })
 
