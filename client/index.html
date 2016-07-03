@@ -32,7 +32,9 @@
         <script src="app.js"></script>
       </head>
 
+      <body>
 
+      <div class="container-fluid">
 
         <div ng-controller = "navBarController">
 			<nav class="navbar navbar-inverse navbar-fixed-top ">
@@ -40,7 +42,7 @@
 					<a class="navbar-brand" href="/">Polling App[BETA]</a>
 				</div>
 
-        <ul class="nav navbar-nav navbar-right collapse navbar-collapse" data-toggle="dropdown">
+        <ul class="nav navbar-nav navbar-right" data-toggle="dropdown" style="padding-right:20px;">
           <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
           <li><a href="#/post"><i class="fa fa-home"></i> Create New Poll</a></li>
 
@@ -52,9 +54,7 @@
 			</nav>
 		</div>
 
-    <body>
 
-        <div class="container">
 
             <div ng-view></div>
 
