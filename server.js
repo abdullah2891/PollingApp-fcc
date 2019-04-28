@@ -52,10 +52,10 @@ function(req,res){
   res.redirect('/');
 })
 
-app.use('/',express.static(__dirname+'/client'));
+//app.use('/',express.static(__dirname+'/client'));
 
 
-var PORT = process.env.PORT ||3000;
+var PORT = process.env.PORT ||3001;
 
 app.listen(PORT,function(){
   console.log("polling app is starting at PORT "+PORT);
