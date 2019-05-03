@@ -19,9 +19,15 @@ const styles = {
   },
 };
 
+function openTwitterCallback(){
+
+  window.open("http://127.0.0.1:3001/login/twitter/callback", "_top");
+}
+
+
 function CustomAppBar(props){
   const { classes } = props;
-
+  
   return(
    <div className={classes.root}>
       <AppBar position="static">
@@ -29,7 +35,7 @@ function CustomAppBar(props){
           <Typography variant="h6" color="inherit" className={classes.grow}>
             Polling App
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit" onClick={openTwitterCallback}>Login</Button>
         </Toolbar>
       </AppBar>
     </div>

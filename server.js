@@ -49,7 +49,7 @@ app.get('/info',function(req,res){
 app.get('/login/twitter/callback',
 authController.authenticate,
 function(req,res){
-  res.redirect('/');
+  res.redirect('http://localhost:3000/');
 })
 
 //app.use('/',express.static(__dirname+'/client'));

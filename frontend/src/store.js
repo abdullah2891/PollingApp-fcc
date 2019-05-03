@@ -4,8 +4,11 @@ import { Provider } from 'react-redux';
 
 import rootReducer from './reducers';
 
-export default createStore(rootReducer,compose( 
+const middleware = window.__REDUX_DEVTOOLS_EXTENSION__ ? compose( 
         applyMiddleware(thunk),
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-      )
-  );
+         window.__REDUX_DEVTOOLS_EXTENSION__()
+      ): applyMiddleware(thunk);
+
+
+
+export default createStore(rootReducer,middleware );
