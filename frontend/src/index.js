@@ -10,7 +10,6 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 
-console.log(actions)
 store.dispatch(actions.pollAction.getPoll());
 
 
