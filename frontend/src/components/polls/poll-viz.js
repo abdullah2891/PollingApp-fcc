@@ -2,32 +2,33 @@ import React from 'react';
 import {
   PieChart, Pie, Legend, Tooltip,
 } from 'recharts';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import { withStyles } from '@material-ui/core/styles';
 
-
-const data01 = [
-  { name: 'Group A', value: 400 }, { name: 'Group B', value: 300 },
-  { name: 'Group C', value: 300 }, { name: 'Group D', value: 200 },
-  { name: 'Group E', value: 278 }, { name: 'Group F', value: 189 },
-];
-
-const data02 = [
-  { name: 'Group A', value: 2400 }, { name: 'Group B', value: 4567 },
-  { name: 'Group C', value: 1398 }, { name: 'Group D', value: 9800 },
-  { name: 'Group E', value: 3908 }, { name: 'Group F', value: 4800 },
-];
+const styles = {
+  card: {
+    width: "35vw",
+    height: "95%"
+  }
+}
 
 
 function PollViz(props){
-  return(
-       <PieChart width={400} height={400}>
-        <Pie dataKey="value" isAnimationActive={false} data={data01} cx={200} cy={200} outerRadius={80} fill="#8884d8" label />
-        <Pie dataKey="value" data={data02} cx={500} cy={200} innerRadius={40} outerRadius={80} fill="#82ca9d" />
-        <Tooltip />
-      </PieChart>   
+  const {data, classes , dataKey, nameKey} = props;
 
+  return(
+      <Card className={classes.card}>
+        <CardContent>
+           <PieChart width={400} height={400}>
+              <Pie dataKey={dataKey} nameKey={nameKey}  isAnimationActive={false} data={data} cx={200} cy={200} outerRadius={80} fill="#8884d8" label />
+            <Tooltip />
+          </PieChart>   
+        </CardContent>
+      </Card>
   )
 }
 
 
 
-export default PollViz;
+export default withStyles(styles)(PollViz);

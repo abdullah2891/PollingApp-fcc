@@ -23,6 +23,9 @@ function openTwitterCallback(){
   window.open("http://127.0.0.1:3001/login/twitter/callback", "_top");
 }
 
+function homeButton(){
+  window.open("/","_top");
+}
 
 function CustomAppBar(props){
   const { classes } = props;
@@ -35,6 +38,7 @@ function CustomAppBar(props){
             Polling App
           </Typography>
           <Button color="inherit" onClick={openTwitterCallback}>Login</Button>
+          <Button color="inherit" onClick={homeButton}>Home</Button>
         </Toolbar>
       </AppBar>
     </div>

@@ -7,7 +7,7 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Button from '@material-ui/core/Button';
-import PlusButton from './add-icon.svg'
+import PlusButton from './add-icon.svg';
 
 const styles= {
 
@@ -31,12 +31,12 @@ function ChoiceInput(props){
 
   return (
       <div className={classes.buttonContainer}>
+        <form onSubmit={pushChoice}>
           <TextField
             id="outlined-name"
             label="choice"
             value={choice}
             onChange={event => setChoice(event.target.value)}
-            onSubmit = {pushChoice}
             margin="normal"
             variant="outlined"
             />
@@ -58,7 +58,7 @@ function ChoiceInput(props){
               })
             }
           </List>
-
+        </form>
           
         </div>
   )
