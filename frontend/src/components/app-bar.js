@@ -20,7 +20,6 @@ const styles = {
 };
 
 function openTwitterCallback(){
-
   window.open("http://127.0.0.1:3001/login/twitter/callback", "_top");
 }
 

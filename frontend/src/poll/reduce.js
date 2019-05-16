@@ -1,18 +1,36 @@
-import {GET_POLL , FETCHED_POLL , ERROR_POLL} from './types';
+import {
+    GET_POLL,
+    FETCHING_POLL,
+    FETCHED_POLL,
+    ERROR_POLL,
+    CAST_VOTE,
+    CASTING_VOTE,
+    CREATING_POLL,
+    CREATE_POLL,
+    SET_QUESTION,
+    ADD_CHOICE,
+    CLEAR_ALL
+} from './types';
 
 
 export default function reducer(state = {} ,action){
   const type = action.type;
 
   switch(type){
-    
     case GET_POLL:
       return {...state ,fetching: true}
     case FETCHED_POLL:
         return {...state,  fetching: false , poll: action.data};
     case ERROR_POLL:
-          return  { ...state , fetching: false, error: action.error};
-
+          return  { ...state , fetching: false, castingVote: false , error: action.error};
+    case CASTING_VOTE:
+      return {...state ,castingVote: true}
+    case CAST_VOTE:
+        return {...state, castingVote: false, cast: action.data}; 
+    case CREATING_POLL:
+        return {...state, creatingPoll: true};
+    case CREATE_POLL:
+        return {...state, create: action.data ,creatingPoll: false};
     default: 
           return state;
   }
