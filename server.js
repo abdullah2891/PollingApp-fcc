@@ -42,8 +42,8 @@ router.route('/info')
 
 
 app.get('/info',function(req,res){
-  var user = req.session.passport.user.username;
-  res.send(user);
+  var user = req.session.passport.user;
+  res.json(user);
 })
 
 app.get('/login/twitter/callback',
@@ -52,6 +52,9 @@ function(req,res){
   res.redirect('http://localhost:3000/');
 })
 
+
+app.get('/auth/twitter',
+  passport.authenticate('twitter'));
 //app.use('/',express.static(__dirname+'/client'));
 
 
