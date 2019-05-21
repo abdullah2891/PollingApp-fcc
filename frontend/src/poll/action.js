@@ -86,7 +86,10 @@ export function createPoll(question,choice){
 
         fetch('api/poll', {
             method: 'POST',
-            data: JSON.stringify({question,choice})
+            headers:{
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({question,choice})
         })
             .then(response =>  response.json())
             .then(response =>{

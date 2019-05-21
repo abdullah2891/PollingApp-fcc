@@ -8,9 +8,14 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Button from '@material-ui/core/Button';
 import PlusButton from './add-icon.svg';
+import AddIcon from '@material-ui/icons/Add';
+
 
 const styles= {
-
+  buttonContainer: {
+    display: 'flex',
+    flexWrap: 'wrap'
+  }
 
 }
 
@@ -30,19 +35,21 @@ function ChoiceInput(props){
 
 
   return (
-      <div className={classes.buttonContainer}>
+      <div>
         <form onSubmit={pushChoice}>
-          <TextField
-            id="outlined-name"
-            label="choice"
-            value={choice}
-            onChange={event => setChoice(event.target.value)}
-            margin="normal"
-            variant="outlined"
-            />
-          <Button onClick={pushChoice}>
-            <img src={PlusButton} />
-          </Button>
+          <div className={classes.buttonContainer}>
+            <TextField
+              id="outlined-name"
+              label="choice"
+              value={choice}
+              onChange={event => setChoice(event.target.value)}
+              margin="normal"
+              variant="outlined"
+              />
+            <Button onClick={pushChoice}>
+              <AddIcon />
+            </Button>
+          </div>
 
           <List
             component="nav"

@@ -7,20 +7,22 @@ exports.createPoll = function(req,res){
   var newPoll = new poll();
   var entry = req.body;
 
-  newPoll.question = entry.question;
 
   entry["choice"].forEach(function(choice){
-    if(choice!="") newPoll.choice.push({option:choice,vote:0.1});
+    if(choice!="") {
+      newPoll.choice.push({option:choice,vote:0.1});
+    }
   })
 
 
+  newPoll.question = entry.question;
 
   newPoll.user.push("first");
   newPoll.save(function(err,poll){
     if(!err){
       res.json(poll);
     }else{
-      res.send(400,"Error:Did you fill all the required fields?");
+      res.send(400,err);
     }
   })
 

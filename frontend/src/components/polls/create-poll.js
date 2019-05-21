@@ -13,10 +13,7 @@ const styles = {
     marginTop: "20vh",
     maxWidth: "30vw"
   },
-  buttonContainer: {
-    display: 'flex',
-    flexWrap: 'wrap'
-  }
+  
 }
 
 
@@ -29,7 +26,6 @@ function CreatePoll(props){
   return (
     <form className={classes.container} onSubmit={onSubmit.bind(this,question, choices)} noValidate autoComplete="off">
         <TextField
-          id="outlined-name"
           label="Question"
           value={question}
           onChange={event => setQuestion(event.target.value)}
