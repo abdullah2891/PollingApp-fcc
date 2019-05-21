@@ -70,14 +70,7 @@ authController.authenticate)
 
 
 app.get('/auth/twitter',
-  passport.authenticate('twitter'),
-  function(req, res){
-    req.login(req.user, function(err){
-      console.log(err)
-    })
-    res.redirect('http:/127.0.0.1:3000/');
-  }
-);
+  passport.authenticate('twitter'));
 //app.use('/',express.static(__dirname+'/client'));
 
 

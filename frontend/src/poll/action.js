@@ -55,7 +55,10 @@ export function castVote(choiceID){
 
         fetch('/api/vote/cast',{
             method: 'POST',
-            data: JSON.stringify({choiceID})
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({choiceID})
         })
         .then(response => response.json())
         .then(response =>{

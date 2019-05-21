@@ -71,6 +71,7 @@ exports.loggedIn = function(req,res){
 
 exports.castVote = function(req,res,next){
   var entry = req.body;
+  console.log(entry)
   var ID = entry.choiceID;
   if(req.isAuthenticated())
    {
@@ -78,9 +79,8 @@ exports.castVote = function(req,res,next){
     var user = req.session.passport.user.username;
   //console.log(user);
   //var user = entry.user;
-  poll.findOne({"choice._id":ID},function(err,polls){
-
-    if(!err && polls){
+  poll.findOne({"choice._id":ID},function(err, polls){
+    if(polls){
       //checking uniquness
       var unique = true;
       polls["user"].forEach(function(UserDB){
@@ -89,7 +89,7 @@ exports.castVote = function(req,res,next){
         };
       })
 
-      polls.user.push(user);
+      polls.user = polls.user.concat([user]);
       polls["choice"].forEach(function(value,index){
         if(value["_id"]==ID){
           polls.choice[index].vote+= 1;
@@ -102,6 +102,8 @@ exports.castVote = function(req,res,next){
         polls.save(function(err,p){
           if(!err){
             res.status(200).send("Voted!");
+          }else{
+            res.json(500 ,{error: err})
           }
        });
      }else{
