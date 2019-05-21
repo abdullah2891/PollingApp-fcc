@@ -19,7 +19,15 @@ export function getPoll() {
             type: GET_POLL
         });
 
-        fetch('/api/poll')
+        fetch('/api/poll',
+            {
+                credentials: 'include',
+                headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Credentials": true
+              }
+        })
             .then(response => response.json())
             .then(response => {
                 dispatch({

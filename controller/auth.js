@@ -3,11 +3,10 @@ var twitterStrategy =  require('passport-twitter').Strategy;
 var tweetConfig = require('../config/twitter');
 
 passport.serializeUser(function(user,done){
-  console.log("Serializing User");
+  //console.log("Serializing User", user);
   done(null,user);
 });
 passport.deserializeUser(function(user,done){
-  console.log("Deserializing");
   done(null,user);
 });
 
@@ -27,7 +26,7 @@ passport.use(new twitterStrategy(
 
   exports.authenticate = passport.authenticate('twitter',{
       failureRedirect:'/#/login',
-      successRedirect: 'http://localhost:3000/'
+      successRedirect: 'http://127.0.0.1:3000/'
   });
 
   exports.isLoggedIn = function(req,res,next){
@@ -38,6 +37,4 @@ passport.use(new twitterStrategy(
     }else{
       res.send(400,"You are not authenticated");
     }
-
-
   }

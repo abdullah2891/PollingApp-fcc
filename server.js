@@ -2,8 +2,11 @@ var express = require('express');
 var app =express();
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
-var expressSession = require('express-session');
 var passport = require('passport');
+var cookieSession = require('cookie-session');
+var cookieParser = require('cookie-parser');
+var cors  = require('cors');
+var session = require('express-session');
 //db
 //mongoose.connect("mongodb://localhost/newPoll");
 mongoose.connect("mongodb://heroku_rthknr1j:4nnrnftg22o2jd5818c2jkt244@ds017553.mlab.com:17553/heroku_rthknr1j");
@@ -15,11 +18,27 @@ authController = require('./controller/auth');
 app.use(bodyParser.urlencoded({exteded:true}));
 app.use(bodyParser.json());
 
-app.use(expressSession({
-  secret:"secret"
-}))
+
+app.use(session({
+    secret: 'sdlfjljrowuroweu',
+    cookie: { secure: false }
+}));
+
+// parse cookies
+app.use(cookieParser());
+
 app.use(passport.initialize());
 app.use(passport.session());
+
+// set up cors to allow us to accept requests from our client
+app.use(
+  cors({
+    origin: "http://127.0.0.1:3000", // allow to server to accept request from different origin
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true // allow session cookie from browser to pass through
+  })
+);
+
 
 //router configuration
 
@@ -42,7 +61,7 @@ router.route('/info')
 
 
 app.get('/info',function(req,res){
-  var user = req.session.passport.user;
+  var user = req.user;
   res.json(user);
 })
 
@@ -51,7 +70,14 @@ authController.authenticate)
 
 
 app.get('/auth/twitter',
-  passport.authenticate('twitter'));
+  passport.authenticate('twitter'),
+  function(req, res){
+    req.login(req.user, function(err){
+      console.log(err)
+    })
+    res.redirect('http:/127.0.0.1:3000/');
+  }
+);
 //app.use('/',express.static(__dirname+'/client'));
 
 
