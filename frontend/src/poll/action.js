@@ -24,7 +24,7 @@ export function getPoll() {
             .then(response => {
                 dispatch({
                     type: FETCHED_POLL,
-                    data: response
+                    data: response.polls
                 });
             })
             .catch(error => {

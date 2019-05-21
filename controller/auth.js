@@ -25,7 +25,11 @@ passport.use(new twitterStrategy(
   }))
 
 
-  exports.authenticate = passport.authenticate('twitter',{failureRedirect:'/#/login'});
+  exports.authenticate = passport.authenticate('twitter',{
+      failureRedirect:'/#/login',
+      successRedirect: 'http://localhost:3000/'
+  });
+
   exports.isLoggedIn = function(req,res,next){
     if(req.isAuthenticated())
     {

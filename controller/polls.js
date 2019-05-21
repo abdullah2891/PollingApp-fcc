@@ -39,18 +39,14 @@ exports.getAllPoll = function(req,res){
           array.push(options.vote);
           q_array.push(options.option);
         })
-        console.log(poll["question"]);
-        console.log(array);
         voteArray.push({"question":poll.question,"votes":array});
         poll.voteArray.push(array);
         poll.optionArray.push(q_array);
         poll_array.push(q_array);
 
       })
-      console.log(voteArray);
-      console.log(poll_array);
 
-      res.json(polls);
+      res.json({polls, auth: req.isAuthenticated() });
     }else{
       res.send(400,"error making new poll");
     }
@@ -84,7 +80,7 @@ exports.castVote = function(req,res,next){
   //var user = entry.user;
   poll.findOne({"choice._id":ID},function(err,polls){
 
-    if(!err){
+    if(!err && polls){
       //checking uniquness
       var unique = true;
       polls["user"].forEach(function(UserDB){
@@ -93,7 +89,6 @@ exports.castVote = function(req,res,next){
         };
       })
 
-      console.log(polls.choice);
       polls.user.push(user);
       polls["choice"].forEach(function(value,index){
         if(value["_id"]==ID){
@@ -102,7 +97,6 @@ exports.castVote = function(req,res,next){
       })
 
 
-      console.log(unique);
       if(unique){
 
         polls.save(function(err,p){
@@ -111,12 +105,11 @@ exports.castVote = function(req,res,next){
           }
        });
      }else{
-       console.log("already voted");
        res.send(401,"You already voted");
      }
 
   }else{
-    res.send(400,"poll does not exist");
+    res.json(400,{status:"poll doesn't exist"});
   }
   })
 }else{

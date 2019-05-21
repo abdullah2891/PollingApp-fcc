@@ -47,10 +47,7 @@ app.get('/info',function(req,res){
 })
 
 app.get('/login/twitter/callback',
-authController.authenticate,
-function(req,res){
-  res.redirect('http://localhost:3000/');
-})
+authController.authenticate)
 
 
 app.get('/auth/twitter',
