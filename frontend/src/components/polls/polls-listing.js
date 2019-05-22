@@ -36,7 +36,7 @@ function ListItemLink(props) {
 
 
 function PollListing(props){
-  const {fetching, polls, classes} = props;
+  const {fetching, polls, classes, profile={}} = props;
   console.log(actions.pollAction)
   return(
       <div>
@@ -57,13 +57,15 @@ function PollListing(props){
                 <PollIcon /> 
               </ListItemIcon>
               <ListItemText inset primary={poll.question} />
-              <Button onClick={e =>{
-                  e.preventDefault();
-                  store.dispatch(actions.pollAction.deletePoll(poll._id));
-                }   
-              }>
-                <DeleteIcon/>
-              </Button>
+              {profile.username && poll.owner === profile.username &&
+                <Button onClick={e =>{
+                    e.preventDefault();
+                    store.dispatch(actions.pollAction.deletePoll(poll._id));
+                  }   
+                }>
+                  <DeleteIcon/>
+                </Button>
+              }
             </ListItemLink>)
           )
           }

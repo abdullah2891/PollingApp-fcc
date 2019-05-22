@@ -19,7 +19,7 @@ const styles= {
 
 
 function App(props) {
-  const {fetching , polls} =  props;
+  const {fetching , polls ,profile} =  props;
 
   return (
     <div className="App">
@@ -33,6 +33,7 @@ function App(props) {
               <PollListing
                 polls = {polls}
                 fetching = {fetching}
+                profile = {profile}
               />
             </Route>
 
