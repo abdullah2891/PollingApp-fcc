@@ -47,8 +47,9 @@ app.use('/api',router);
 //routes
 
 router.route('/poll')
-.post(pollController.createPoll)
-.get(pollController.getAllPoll);
+  .post(pollController.createPoll)
+  .get(pollController.getAllPoll)
+  .delete(pollController.deletePoll);
 
 router.route('/cleanAll')
 .get(pollController.cleanAll);
@@ -56,14 +57,9 @@ router.route('/cleanAll')
 router.route('/vote/cast')
 .post(pollController.castVote);
 
-router.route('/info')
+router.route('/profile')
 .get(pollController.loggedIn);
 
-
-app.get('/info',function(req,res){
-  var user = req.user;
-  res.json(user);
-})
 
 app.get('/login/twitter/callback',
 authController.authenticate)

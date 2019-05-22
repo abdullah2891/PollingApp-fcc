@@ -9,7 +9,9 @@ import {
     CREATING_POLL,
     SET_QUESTION,
     ADD_CHOICE,
-    CLEAR_ALL
+    CLEAR_ALL,
+    DELETING_POLL,
+    DELETE_POLL
 } from './types';
 
 export function getPoll() {
@@ -106,5 +108,31 @@ export function createPoll(question,choice){
             });;
     }
 
+}
+
+
+export function deletePoll(poll_id){
+    return dispatch =>{
+        fetch(`api/poll?id=${poll_id}`,{
+            method: 'DELETE',
+            headers:{
+                'Content-type': 'application/json'
+            }
+        })
+            .then(response =>  response.json)
+            .then(() =>{
+                dispatch({
+                    type: DELETE_POLL,
+                    id: poll_id
+                });
+            })
+            .catch(error=>{
+                dispatch({
+                    type: ERROR_POLL,
+                    error 
+                })
+            })
+
+    }
 }
 

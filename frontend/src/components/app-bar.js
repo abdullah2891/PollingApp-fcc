@@ -5,6 +5,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
+import ProfileBadge from './shared/profile-badge.js';
 
 const styles = {
   root: {
@@ -19,17 +20,16 @@ const styles = {
   },
 };
 
-function openTwitterCallback(){
-  window.open("http://127.0.0.1:3001/login/twitter/callback", "_top");
-}
+const twitterCallback = "http://127.0.0.1:3001/login/twitter/callback";
 
-function homeButton(){
-  window.open("/","_top");
+
+function openLink(link){
+  window.open(link, "_top");
 }
 
 function CustomAppBar(props){
   const { classes } = props;
-  
+  console.log(props.profile) 
   return(
    <div className={classes.root}>
       <AppBar position="static">
@@ -37,8 +37,18 @@ function CustomAppBar(props){
           <Typography variant="h6" color="inherit" className={classes.grow}>
             Polling App
           </Typography>
-          <Button color="inherit" onClick={openTwitterCallback}>Login</Button>
-          <Button color="inherit" onClick={homeButton}>Home</Button>
+          {!props.profile  &&
+            <Button color="inherit" onClick={openLink.bind(this, twitterCallback)}>Login</Button>
+          }
+          <Button color="inherit" onClick={openLink.bind(this, '/')}>Home</Button>
+          {props.profile &&
+            <Button color="inherit" onClick={openLink.bind(this, '/create')}>Create Poll</Button>
+          }
+          {props.profile  &&
+            <ProfileBadge
+              profile = {props.profile}
+            />
+          }
         </Toolbar>
       </AppBar>
     </div>

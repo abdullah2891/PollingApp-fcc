@@ -8,9 +8,11 @@ import ListItemText from '@material-ui/core/ListItemText';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import PollIcon from '@material-ui/icons/Poll';
 import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import Loading from '../loading.js';
-
+import {actions} from '../../action-resolver';
+import store from '../../store';
 
 const styles = theme => ({
   root: {
@@ -35,7 +37,7 @@ function ListItemLink(props) {
 
 function PollListing(props){
   const {fetching, polls, classes} = props;
-  console.log(props)
+  console.log(actions.pollAction)
   return(
       <div>
         <Button className={classes.createPollContainer}  href="/create-poll">
@@ -55,6 +57,13 @@ function PollListing(props){
                 <PollIcon /> 
               </ListItemIcon>
               <ListItemText inset primary={poll.question} />
+              <Button onClick={e =>{
+                  e.preventDefault();
+                  store.dispatch(actions.pollAction.deletePoll(poll._id));
+                }   
+              }>
+                <DeleteIcon/>
+              </Button>
             </ListItemLink>)
           )
           }

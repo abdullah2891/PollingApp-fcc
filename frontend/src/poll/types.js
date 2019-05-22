@@ -8,3 +8,7 @@ export const CASTING_VOTE='API/CAST/CASTING';
 
 export const CREATE_POLL = 'API/CAST/CREATE';
 export const CREATING_POLL='API/CAST/CASTING_POLL';
+
+
+export const DELETING_POLL = 'API/CAST/DELETING';
+export const DELETE_POLL = 'API/POLL/DELETE';

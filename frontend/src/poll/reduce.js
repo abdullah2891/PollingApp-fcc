@@ -9,7 +9,8 @@ import {
     CREATE_POLL,
     SET_QUESTION,
     ADD_CHOICE,
-    CLEAR_ALL
+    CLEAR_ALL,
+    DELETE_POLL
 } from './types';
 
 
@@ -22,7 +23,7 @@ export default function reducer(state = {} ,action){
     case FETCHED_POLL:
         return {...state,  fetching: false , poll: action.data};
     case ERROR_POLL:
-          return  { ...state , fetching: false, castingVote: false , error: action.error};
+          return  { ...state , fetching: false, deletingPoll: false, castingVote: false , error: action.error};
     case CASTING_VOTE:
       return {...state ,castingVote: true}
     case CAST_VOTE:
@@ -31,6 +32,8 @@ export default function reducer(state = {} ,action){
         return {...state, creatingPoll: true};
     case CREATE_POLL:
         return {...state, create: action.data ,creatingPoll: false};
+    case DELETE_POLL:
+        return {...state, poll: state.poll.filter(p => p._id !== action.id)};
     default: 
           return state;
   }

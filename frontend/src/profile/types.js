@@ -1,0 +1,1 @@
+export const FETCHED_PROFILE = 'API/PROFILE/GET';

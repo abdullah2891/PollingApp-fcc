@@ -11,6 +11,7 @@ import * as serviceWorker from './serviceWorker';
 
 
 store.dispatch(actions.pollAction.getPoll());
+store.dispatch(actions.profileAction.getProfile());
 
 
 ReactDOM.render(

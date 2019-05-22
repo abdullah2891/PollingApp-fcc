@@ -8,19 +8,31 @@ exports.createPoll = function(req,res){
   var entry = req.body;
 
 
-  entry["choice"].forEach(function(choice){
-    if(choice!="") {
-      newPoll.choice.push({option:choice,vote:0.1});
-    }
-  })
+  //entry["choice"].forEach(function(choice){
+  //  if(choice!="") {
+  //    newPoll.choice.push({option:choice,vote:0.1});
+  //  }
+  //})
 
 
   newPoll.question = entry.question;
-
-  newPoll.user.push("first");
+console.log(newPoll.choice)
   newPoll.save(function(err,poll){
     if(!err){
-      res.json(poll);
+      poll.choice = entry["choice"].map(c =>{
+        return{
+          option: c,
+          vote: 0.1
+        }
+      })
+
+      poll.save(function(err, p){
+        if(!err){
+          res.json(p);
+        }else{
+          res.json(500,err)
+        }
+      });
     }else{
       res.send(400,err);
     }
@@ -67,8 +79,13 @@ exports.cleanAll = function(req,res){
 
 
 exports.loggedIn = function(req,res){
-  var user = req.session;
-  res.send(user);
+  const user = req.user;
+
+  if(Object.keys(user || {}).length > 0){
+    res.json(200, {profile: user});
+  }else{
+    res.json(500, {error: "failed to fetch profile"});
+  }
 }
 
 exports.castVote = function(req,res,next){
@@ -120,4 +137,24 @@ exports.castVote = function(req,res,next){
   console.log("Not findig cookie");
   res.send(400,"You are not logged in");
 }
+}
+
+
+exports.deletePoll = function(req, res){
+  const record_id = req.query.id;
+     
+  if(record_id){
+    poll.deleteOne({_id: record_id}, function(err, deletedPoll){
+      if(err){
+        res.json(500 ,err);
+      }else{
+        res.json(200 , {status:  deletedPoll});
+      }
+    });
+  }else{
+    res.json({
+      status: "Record id missing"
+    });
+  }
+
 }

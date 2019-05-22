@@ -8,6 +8,9 @@ import PollDetail  from './components/polls/poll-detail.js';
 import PollAnalytics  from './components/polls/poll-analytics.js';
 import CreatePoll  from './components/polls/create-poll.js';
 
+import {actions} from './action-resolver';
+import store from './store.js';
+
 const styles= {
   container:{
     padding: "15px"
@@ -17,10 +20,12 @@ const styles= {
 
 function App(props) {
   const {fetching , polls} =  props;
-  console.log({polls})
+
   return (
     <div className="App">
-      <AppBar /> 
+      <AppBar 
+        profile = {props.profile} 
+      /> 
       <div style={styles.container}>
         <BrowserRouter>
           <Switch> 
@@ -45,7 +50,8 @@ function App(props) {
 const mapToProps =  state =>{
   return {
     polls: state.pollReducer.poll,
-    fetching: state.pollReducer.fetching
+    fetching: state.pollReducer.fetching,
+    profile: state.profileReducer.profile
   }
 }
 
