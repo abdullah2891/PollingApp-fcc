@@ -7,16 +7,14 @@ exports.createPoll = function(req,res){
   var newPoll = new poll();
   var entry = req.body;
 
-
-  //entry["choice"].forEach(function(choice){
-  //  if(choice!="") {
-  //    newPoll.choice.push({option:choice,vote:0.1});
-  //  }
-  //})
+  if(!req.isAuthenticated()){
+    return res.json(500 , {status: 'not logged in'});
+  }
 
 
   newPoll.question = entry.question;
-console.log(newPoll.choice)
+  newPoll.owner = req.user.username;
+
   newPoll.save(function(err,poll){
     if(!err){
       poll.choice = entry["choice"].map(c =>{
@@ -142,7 +140,7 @@ exports.castVote = function(req,res,next){
 
 exports.deletePoll = function(req, res){
   const record_id = req.query.id;
-     
+  
   if(record_id){
     poll.deleteOne({_id: record_id}, function(err, deletedPoll){
       if(err){

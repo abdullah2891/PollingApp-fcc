@@ -5,5 +5,6 @@ module.exports = mongoose.model('poll',{
   choice : [{option:String,vote:Number}],
   voteArray:[],
   optionArray:[],
-  user: [String]
+  user: [String],
+  owner: String
 })
