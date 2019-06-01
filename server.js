@@ -33,8 +33,12 @@ app.use(passport.session());
 // set up cors to allow us to accept requests from our client
 app.use(
   cors({
-    origin: "http://127.0.0.1:3000", // allow to server to accept request from different origin
+    origin: true, // allow to server to accept request from different origin
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    "Access-Control-Allow-Credentials": true,
+    "Access-Control-Allow-Origin": true,
+    "Access-Control-Allow-Headers": true,
+    "Access-Control-Expose-Headers": true,
     credentials: true // allow session cookie from browser to pass through
   })
 );
