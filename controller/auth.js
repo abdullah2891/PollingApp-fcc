@@ -10,7 +10,7 @@ passport.deserializeUser(function(user,done){
   done(null,user);
 });
 
-
+console.log(process.env.redirectURL)
 passport.use(new twitterStrategy(
   {
     consumerKey:tweetConfig.key,
