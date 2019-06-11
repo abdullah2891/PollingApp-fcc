@@ -26,7 +26,7 @@ passport.use(new twitterStrategy(
 
   exports.authenticate = passport.authenticate('twitter',{
       failureRedirect:'/#/login',
-      successRedirect: process.env.redirectURL 
+      successRedirect: "https://pollingapp-fcc.herokuapp.com/login/utwitter/callback" 
   });
 
   exports.isLoggedIn = function(req,res,next){
