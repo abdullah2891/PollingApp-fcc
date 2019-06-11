@@ -16,7 +16,7 @@ passport.use(new twitterStrategy(
     consumerKey:tweetConfig.key,
     consumerSecret: tweetConfig.secret,
     //callbackURL:"https://pollingapp-fcc.herokuapp.com/login/twitter/callback"
-    callbackURL:"https://pollingapp-fcc.herokuapp.com/login/utwitter/callback"
+    callbackURL:"https://pollingapp-fcc.herokuapp.com/login/twitter/callback"
   },
   function(token,tokenSecret,user,done){
     console.log(token);
@@ -26,7 +26,7 @@ passport.use(new twitterStrategy(
 
   exports.authenticate = passport.authenticate('twitter',{
       failureRedirect:'/#/login',
-      successRedirect: "https://pollingapp-fcc.herokuapp.com/login/utwitter/callback" 
+      successRedirect: "https://pollingapp-fcc.herokuapp.com/login/twitter/callback" 
   });
 
   exports.isLoggedIn = function(req,res,next){
