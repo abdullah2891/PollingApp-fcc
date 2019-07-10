@@ -66,7 +66,7 @@ router.route('/profile')
 
 
 app.get('/login/twitter/callback',(req, res)=>{
-  res.redirect('/');
+  res.redirect('https://frontend-polling-app.herokuapp.com');
 })
 
 app.get('/auth/twitter',
