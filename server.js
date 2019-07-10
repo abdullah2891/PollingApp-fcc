@@ -65,7 +65,7 @@ router.route('/profile')
 .get(pollController.loggedIn);
 
 
-app.get('/twitter/callback',(req, res)=>{
+app.get('/login/twitter/callback',(req, res)=>{
   res.redirect('/');
 })
 
