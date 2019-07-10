@@ -65,6 +65,10 @@ router.route('/profile')
 .get(pollController.loggedIn);
 
 
+app.get('/twitter/callback',(req, res)=>{
+  res.redirect('/');
+})
+
 app.get('/auth/twitter',
   authController.authenticate);
 //app.use('/',express.static(__dirname+'/client'));
