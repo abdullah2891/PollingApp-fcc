@@ -80,7 +80,7 @@ app.get('/login/twitter/callback',passport.authenticate('twitter',{
   }), 
   (req, res)=>{
     const token = jwt.sign(req.user , process.env.secret, {expiresIn: '1h'})
-    res.redirect('http://127.0.0.1:3000/login/callback?token=' + token);
+    res.redirect(`${process.env.frontend_url}/login/callback?token=` + token);
   })
 
 app.get('/auth/twitter',
