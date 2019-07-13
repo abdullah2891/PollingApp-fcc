@@ -7,13 +7,8 @@ exports.createPoll = function(req,res){
   var newPoll = new poll();
   var entry = req.body;
 
-  if(!req.isAuthenticated()){
-    return res.json(500 , {status: 'not logged in'});
-  }
-
-
   newPoll.question = entry.question;
-  newPoll.owner = req.user.username;
+  newPoll.owner = req.user.screen_name;
 
   newPoll.save(function(err,poll){
     if(!err){
@@ -36,6 +31,11 @@ exports.createPoll = function(req,res){
     }
   })
 
+}
+
+
+exports.test = function(req, res){
+    res.send('authenticate');
 }
 
 exports.getAllPoll = function(req,res){
@@ -93,7 +93,7 @@ exports.castVote = function(req,res,next){
   if(req.isAuthenticated())
    {
 
-    var user = req.session.passport.user.username;
+    var user = req.session.passport.user.screen_name;
   //console.log(user);
   //var user = entry.user;
   poll.findOne({"choice._id":ID},function(err, polls){

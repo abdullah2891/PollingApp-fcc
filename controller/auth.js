@@ -27,8 +27,7 @@ passport.use(new twitterStrategy(
   }))
 
 
-exports.authenticate = passport.authenticate('twitter',{
-    failureRedirect:'/#/login',
+exports.authenticate = passport.authenticate('jwt',{
     session: false
 });
 

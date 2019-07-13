@@ -53,9 +53,12 @@ app.use('/api',router);
 //routes
 
 router.route('/poll')
-  .post(pollController.createPoll)
+  .post(authController.authenticate,pollController.createPoll)
   .get(pollController.getAllPoll)
-  .delete(pollController.deletePoll);
+  .delete(authController.authenticate,pollController.deletePoll);
+
+router.route('/test')
+  .get(authController.authenticate,pollController.test)
 
 router.route('/cleanAll')
 .get(pollController.cleanAll);
@@ -64,20 +67,26 @@ router.route('/vote/cast')
 .post(pollController.castVote);
 
 
-app.get('/api/profile', passport.authenticate('jwt'), (req, res)=>{
+app.get('/api/profile', authController.authenticate, (req, res)=>{
   res.json(req.user)
 })
 
 
-app.get('/login/twitter/callback',authController.authenticate, (req, res)=>{
-  console.log(req.user)
-  
-  const token = jwt.sign(req.user , tweetConfig.secret, {expiresIn: '5m'})
-  res.redirect('http://127.0.0.1:3000/login/callback?token=' + token);
-})
+app.get('/login/twitter/callback',passport.authenticate('twitter',{
+    failureRedirect:'/#/login',
+    session: false
+  }), 
+  (req, res)=>{
+    const token = jwt.sign(req.user , tweetConfig.secret, {expiresIn: '1h'})
+    res.redirect(`${tweetConfig.redirect_url}?token=` + token);
+  })
 
 app.get('/auth/twitter',
-  authController.authenticate);
+  passport.authenticate('twitter',{
+    failureRedirect:'/#/login',
+    session: false
+  })
+);
 //app.use('/',express.static(__dirname+'/client'));
 
 
