@@ -64,7 +64,7 @@ router.route('/cleanAll')
 .get(pollController.cleanAll);
 
 router.route('/vote/cast')
-.post(pollController.castVote);
+.post(authController.authenticate, pollController.castVote);
 
 
 app.get('/api/profile', authController.authenticate, (req, res)=>{
@@ -78,7 +78,7 @@ app.get('/login/twitter/callback',passport.authenticate('twitter',{
   }), 
   (req, res)=>{
     const token = jwt.sign(req.user , tweetConfig.secret, {expiresIn: '1h'})
-    res.redirect(`${tweetConfig.redirect_url}?token=` + token);
+    res.redirect('http://127.0.0.1:3000/login/callback?token=' + token);
   })
 
 app.get('/auth/twitter',

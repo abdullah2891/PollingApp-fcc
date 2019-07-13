@@ -6,9 +6,8 @@ var passport = require('passport');
 exports.createPoll = function(req,res){
   var newPoll = new poll();
   var entry = req.body;
-
   newPoll.question = entry.question;
-  newPoll.owner = req.user.screen_name;
+  newPoll.owner = req.user.user.screen_name;
 
   newPoll.save(function(err,poll){
     if(!err){
@@ -58,7 +57,7 @@ exports.getAllPoll = function(req,res){
 
       })
 
-      res.json({polls, auth: req.isAuthenticated() });
+      res.json({polls});
     }else{
       res.send(400,"error making new poll");
     }
@@ -90,12 +89,10 @@ exports.castVote = function(req,res,next){
   var entry = req.body;
   console.log(entry)
   var ID = entry.choiceID;
-  if(req.isAuthenticated())
-   {
 
-    var user = req.session.passport.user.screen_name;
+  var user = req.user.user.screen_name;
+  console.log(req.user)
   //console.log(user);
-  //var user = entry.user;
   poll.findOne({"choice._id":ID},function(err, polls){
     if(polls){
       //checking uniquness
@@ -108,7 +105,7 @@ exports.castVote = function(req,res,next){
 
       polls.user = polls.user.concat([user]);
       polls["choice"].forEach(function(value,index){
-        if(value["_id"]==ID){
+        if(value["_id"]===ID){
           polls.choice[index].vote+= 1;
         }
       })
@@ -118,7 +115,7 @@ exports.castVote = function(req,res,next){
 
         polls.save(function(err,p){
           if(!err){
-            res.status(200).send("Voted!");
+            res.status(200).send({status: "Voted!"});
           }else{
             res.json(500 ,{error: err})
           }
@@ -131,10 +128,6 @@ exports.castVote = function(req,res,next){
     res.json(400,{status:"poll doesn't exist"});
   }
   })
-}else{
-  console.log("Not findig cookie");
-  res.send(400,"You are not logged in");
-}
 }
 
 
