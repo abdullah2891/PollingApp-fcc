@@ -1,4 +1,5 @@
 var express = require('express');
+require('dotenv').config();
 var app =express();
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
@@ -8,10 +9,11 @@ var cookieParser = require('cookie-parser');
 var cors  = require('cors');
 var session = require('express-session');
 const jwt = require('jsonwebtoken')
-const tweetConfig = require('./config/twitter.js')
+
+
 //db
 //mongoose.connect("mongodb://localhost/newPoll");
-mongoose.connect("mongodb://heroku_rthknr1j:4nnrnftg22o2jd5818c2jkt244@ds017553.mlab.com:17553/heroku_rthknr1j");
+mongoose.connect(process.env.mongodb_uri);
 //controller
 pollController = require("./controller/polls");
 authController = require('./controller/auth');
@@ -77,7 +79,7 @@ app.get('/login/twitter/callback',passport.authenticate('twitter',{
     session: false
   }), 
   (req, res)=>{
-    const token = jwt.sign(req.user , tweetConfig.secret, {expiresIn: '1h'})
+    const token = jwt.sign(req.user , process.env.secret, {expiresIn: '1h'})
     res.redirect('http://127.0.0.1:3000/login/callback?token=' + token);
   })
 

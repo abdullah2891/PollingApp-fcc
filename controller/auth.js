@@ -1,6 +1,5 @@
 var passport = require('passport');
 var twitterStrategy =  require('passport-twitter').Strategy;
-var tweetConfig = require('../config/twitter');
 
 passport.serializeUser(function(user,done){
   //console.log("Serializing User", user);
@@ -12,9 +11,9 @@ passport.deserializeUser(function(user,done){
 
 passport.use(new twitterStrategy(
   {
-    consumerKey:tweetConfig.key,
-    consumerSecret: tweetConfig.secret,
-    callbackURL: tweetConfig.redirect_url
+    consumerKey:process.env.key,
+    consumerSecret: process.env.secret,
+    callbackURL: process.env.redirect_url
   },
   function(token,tokenSecret,user,done){
       const formatted_user = {
@@ -46,7 +45,7 @@ var JwtStrategy = require('passport-jwt').Strategy,
     ExtractJwt = require('passport-jwt').ExtractJwt;
 const opts = {}
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = tweetConfig.secret;
+opts.secretOrKey = process.env.secret;
 
 passport.use(new JwtStrategy(opts, function(user, done) {
     done(null , user)
