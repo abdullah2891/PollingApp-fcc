@@ -7,6 +7,8 @@ var cookieSession = require('cookie-session');
 var cookieParser = require('cookie-parser');
 var cors  = require('cors');
 var session = require('express-session');
+const jwt = require('jsonwebtoken')
+const tweetConfig = require('./config/twitter.js')
 //db
 //mongoose.connect("mongodb://localhost/newPoll");
 mongoose.connect("mongodb://heroku_rthknr1j:4nnrnftg22o2jd5818c2jkt244@ds017553.mlab.com:17553/heroku_rthknr1j");
@@ -61,12 +63,17 @@ router.route('/cleanAll')
 router.route('/vote/cast')
 .post(pollController.castVote);
 
-router.route('/profile')
-.get(pollController.loggedIn);
+
+app.get('/api/profile', passport.authenticate('jwt'), (req, res)=>{
+  res.json(req.user)
+})
 
 
-app.get('/login/twitter/callback',(req, res)=>{
-  res.redirect('https://frontend-polling-app.herokuapp.com');
+app.get('/login/twitter/callback',authController.authenticate, (req, res)=>{
+  console.log(req.user)
+  
+  const token = jwt.sign(req.user , tweetConfig.secret, {expiresIn: '5m'})
+  res.redirect('http://127.0.0.1:3000/login/callback?token=' + token);
 })
 
 app.get('/auth/twitter',
